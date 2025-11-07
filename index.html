@@ -22,6 +22,11 @@
       color: #1a73e8; 
       word-break: break-word;
     }
+    .counter {
+      margin: 10px 0;
+      font-size: 1em;
+      color: #555;
+    }
     input { 
       font-size: 1.2em; 
       padding: 8px; 
@@ -80,6 +85,7 @@
   <div>
     <span>Translate this word to Chinese:</span>
     <div class="word" id="word"></div>
+    <div class="counter" id="counter">0 / 0 words completed</div>
   </div>
   
   <input type="text" id="answer" placeholder="Type Chinese here">
@@ -108,15 +114,22 @@
       .then(res => res.json())
       .then(data => {
         vocab = data;
+        updateCounter();
         showRandomWord();
       })
       .catch(err => console.error("Error loading JSON:", err));
+
+    function updateCounter() {
+      document.getElementById('counter').textContent = 
+        `${usedIndices.size} / ${vocab.length} words completed`;
+    }
 
     function showRandomWord() {
       if (usedIndices.size === vocab.length) {
         document.getElementById('word').textContent = "🎉 You completed all words!";
         document.getElementById('answer').disabled = true;
         document.getElementById('status').textContent = '';
+        updateCounter();
         return;
       }
 
@@ -132,6 +145,7 @@
       document.getElementById('answer').value = '';
       document.getElementById('status').textContent = '';
       document.getElementById('answer').focus();
+      updateCounter();
     }
 
     function checkAnswer() {

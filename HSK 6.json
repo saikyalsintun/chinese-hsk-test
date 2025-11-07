@@ -1,776 +1,220 @@
-[
-  {    "A": "过滤",    "B": "To filter, Filterate"  },
-  {    "A": "争夺",    "B": "To fight for"  },
-  {
-    "A": "将近",
-    "B": "Approximately"
-  },
-  {
-    "A": "进而",
-    "B": "And then"
-  },
-  {
-    "A": "况且",
-    "B": "Moreover, in addition"
-  },
-  {
-    "A": "宁肯",
-    "B": "Would rather"
-  },
-  {
-    "A": "颇",
-    "B": "Quite"
-  },
-  {
-    "A": "拣",
-    "B": "Pick up"
-  },
-  {
-    "A": "维持",
-    "B": "To preserve, to maintain"
-  },
-  {
-    "A": "分裂",
-    "B": "To split, to divide"
-  },
-  {
-    "A": "跟随",
-    "B": "Follow"
-  },
-  {
-    "A": "寻觅",
-    "B": "To look for, seek for"
-  },
-  {
-    "A": "夸张",
-    "B": "Exaggeration"
-  },
-  {
-    "A": "分明",
-    "B": "Clearly, plainly"
-  },
-  {
-    "A": "贪婪",
-    "B": "Greedy"
-  },
-  {
-    "A": "历来",
-    "B": "All through ages, always"
-  },
-  {
-    "A": "丧失",
-    "B": "To lose, forfeit"
-  },
-  {
-    "A": "忍受",
-    "B": "Endure"
-  },
-  {
-    "A": "滋味",
-    "B": "Taste, Flavor"
-  },
-  {
-    "A": "认定",
-    "B": "To firmly believe"
-  },
-  {
-    "A": "爽快",
-    "B": "Forthright"
-  },
-  {
-    "A": "和睦",
-    "B": "On good term with"
-  },
-  {
-    "A": "融洽",
-    "B": "Harmonious"
-  },
-  {
-    "A": "附和",
-    "B": "To chime with"
-  },
-  {
-    "A": "忽略",
-    "B": "ignore"
-  },
-  {
-    "A": "瞬间",
-    "B": "instant"
-  },
-  {
-    "A": "勤劳",
-    "B": "industrious, diligent"
-  },
-  {
-    "A": "佳肴",
-    "B": "delicious food"
-  },
-  {
-    "A": "巴不得",
-    "B": "to be eager"
-  },
-  {
-    "A": "嚷",
-    "B": "to shout"
-  },
-  {
-    "A": "风度",
-    "B": "demanor, manner"
-  },
-  {
-    "A": "别扭",
-    "B": "to be on bad term"
-  },
-  {
-    "A": "片刻",
-    "B": "instant"
-  },
-  {
-    "A": "刹那",
-    "B": "moment, split second"
-  },
-  {
-    "A": "顿时",
-    "B": "instant, moment"
-  },
-  {
-    "A": "近来",
-    "B": "recently, lately"
-  },
-  {
-    "A": "唠叨",
-    "B": "to chatter with"
-  },
-  {
-    "A": "诱惑",
-    "B": "to entice, to tempt"
-  },
-  {
-    "A": "跨",
-    "B": "to step, to stride"
-  },
-  {
-    "A": "团圆",
-    "B": "to unite"
-  },
-  {
-    "A": "和蔼",
-    "B": "kindly, amiable"
-  },
-  {
-    "A": "体谅",
-    "B": "to show symphathy"
-  },
-  {
-    "A": "隐瞒",
-    "B": "to conceal"
-  },
-  {
-    "A": "掩饰",
-    "B": "to conceal"
-  },
-  {
-    "A": "埋怨",
-    "B": "to blame, to complain"
-  },
-  {
-    "A": "反常",
-    "B": "unusual, abnormal"
-  },
-  {
-    "A": "熬",
-    "B": "to endure"
-  },
-  {
-    "A": "酝酿",
-    "B": "to ferment"
-  },
-  {
-    "A": "迎面",
-    "B": "Face to face"
-  },
-  {
-    "A": "迟疑",
-    "B": "Hesitate"
-  },
-  {
-    "A": "打量",
-    "B": "To look up and down"
-  },
-  {
-    "A": "搓",
-    "B": "To rub ones hand"
-  },
-  {
-    "A": "流露",
-    "B": "To reveal unintentionally"
-  },
-  {
-    "A": "过于",
-    "B": "Too, Exceedingly"
-  },
-  {
-    "A": "斯文",
-    "B": "gentle, refine"
-  },
-  {
-    "A": "操劳",
-    "B": "Diligent"
-  },
-  {
-    "A": "朴实",
-    "B": "Honest"
-  },
-  {
-    "A": "信誉",
-    "B": "Credit, Reputation"
-  },
-  {
-    "A": "欺骗",
-    "B": "To cheat"
-  },
-  {
-    "A": "喜悦",
-    "B": "Delightful, joyous"
-  },
-  {
-    "A": "拨",
-    "B": "To dial"
-  },
-  {
-    "A": "隐约",
-    "B": "Vague, Indistinct"
-  },
-  {
-    "A": "仍旧",
-    "B": "Still, as ever"
-  },
-  {
-    "A": "惦记",
-    "B": "To keep thinking about"
-  },
-  {
-    "A": "辜负",
-    "B": "To fail to live up to"
-  },
-  {
-    "A": "炫耀",
-    "B": "To flaunt, to show off"
-  },
-  {
-    "A": "灿烂",
-    "B": "magnificent, splendid"
-  },
-  {
-    "A": "搁",
-    "B": "To put, to place"
-  },
-  {
-    "A": "执行",
-    "B": "To carry out, to implement"
-  },
-  {
-    "A": "设置",
-    "B": "To set up, Established"
-  },
-  {
-    "A": "机构",
-    "B": "Organization, institution"
-  },
-  {
-    "A": "反感",
-    "B": "digusted"
-  },
-  {
-    "A": "不料",
-    "B": "unexpectly, to ones surprise"
-  },
-  {
-    "A": "未免",
-    "B": "rather, a bit too"
-  },
-  {
-    "A": "厌恶",
-    "B": "hateful, detestable"
-  },
-  {
-    "A": "悲惨",
-    "B": "to despise, to look down upon"
-  },
-  {
-    "A": "喘气",
-    "B": "to breathe deeply, to gasp, to pant"
-  },
-  {
-    "A": "猛烈",
-    "B": "fierce, violent"
-  },
-  {
-    "A": "打猎",
-    "B": "to hunt, to go hunting"
-  },
-  {
-    "A": "毫无",
-    "B": "in the least, without"
-  },
-  {
-    "A": "弊端",
-    "B": "disadvantage, draw back"
-  },
-  {
-    "A": "无非",
-    "B": "nothing but, no more than"
-  },
-  {
-    "A": "动力",
-    "B": "motivation, impetus"
-  },
-  {
-    "A": "涉及",
-    "B": "to involve, to relate to"
-  },
-  {
-    "A": "借助",
-    "B": "to have aid of, to draw support from"
-  },
-  {
-    "A": "不顾",
-    "B": "in spite of, regardless"
-  },
-  {
-    "A": "可恶",
-    "B": "to detest, to lothe"
-  },
-  {
-    "A": "乘",
-    "B": "to avail oneself of, to take advantage of "
-  },
-  {
-    "A": "盯",
-    "B": "to stare at, to fix one's eyes"
-  },
-  {
-    "A": "饶恕",
-    "B": "to forgive, to pardon"
-  },
-  {
-    "A": "耍",
-    "B": "to play, to behave"
-  },
-  {
-    "A": "窜",
-    "B": "to flee, to scurry"
-  },
-  {
-    "A": "耗费",
-    "B": "use, to consme"
-  },
-  {
-    "A": "崩溃",
-    "B": "to collapse, to fall apart"
-  },
-  {
-    "A": "固然",
-    "B": "admittely, it is true"
-  },
-  {
-    "A": "勉强",
-    "B": "to manage with effort, to do with difficulty"
-  },
-  {
-    "A": "隐私",
-    "B": "privacy"
-  },
-  {
-    "A": "倘若",
-    "B": "if suppoosing"
-  },
-  {
-    "A": "恰巧",
-    "B": "by chance"
-  },
-  {
-    "A": "蔑视",
-    "B": "hateful, tragic"
-  },
-  {
-    "A": "强迫",
-    "B": "to force"
-  },
-  {
-    "A": "夕阳",
-    "B": "setting sun"
-  },
-  {
-    "A": "摆脱",
-    "B": "to get rid of, to break away"
-  },
-  {
-    "A": "草率",
-    "B": "careless, rash"
-  },
-  {
-    "A": "敬业",
-    "B": "to dedicate oneself to work"
-  },
-  {
-    "A": "传授",
-    "B": "to teach, to impart"
-  },
-  {
-    "A": "吹牛",
-    "B": "to boast, to brag"
-  },
-  {
-    "A": "溜",
-    "B": "to sneak away"
-  },
-  {
-    "A": "激情",
-    "B": "passion"
-  },
-  {
-    "A": "才干",
-    "B": "talent ability"
-  },
-  {
-    "A": "计较",
-    "B": "to keep account of"
-  },
-  {
-    "A": "投诉",
-    "B": "complain"
-  },
-  {
-    "A": "大不了",
-    "B": "at the worst"
-  },
-  {
-    "A": "指标",
-    "B": "index, norm, target"
-  },
-  {
-    "A": "边缘",
-    "B": "edge, margin"
-  },
-  {
-    "A": "搭档",
-    "B": "partner"
-  },
-  {
-    "A": "成天",
-    "B": "all day long"
-  },
-  {
-    "A": "当初",
-    "B": "at the beginning"
-  },
-  {
-    "A": "创立",
-    "B": "establish, to set up"
-  },
-  {
-    "A": "怠慢",
-    "B": "to give slight shoulder, cold shoulder"
-  },
-  {
-    "A": "凑合",
-    "B": "to do sth half hearthly"
-  },
-  {
-    "A": "做主",
-    "B": "To decide, To make one's own decision"
-  },
-  {
-    "A": "枯燥",
-    "B": "dull, uninteresting"
-  },
-  {
-    "A": "擅长",
-    "B": "to be good at, to be expert in"
-  },
-  {
-    "A": "急躁",
-    "B": "irritable, hot-tempered"
-  },
-  {
-    "A": "顾虑",
-    "B": "misgiving, worry"
-  },
-  {
-    "A": "致使",
-    "B": "to cause, to lead to"
-  },
-  {
-    "A": "终身",
-    "B": "lifetime, all one's life"
-  },
-  {
-    "A": "并非",
-    "B": "not to be, not"
-  },
-  {
-    "A": "精确",
-    "B": "accurate, precise"
-  },
-  {
-    "A": "挫折",
-    "B": "setback, defeat"
-  },
-  {
-    "A": "意志",
-    "B": "will, willpower"
-  },
-  {
-    "A": "畏惧",
-    "B": "to fear, to dread"
-  },
-  {
-    "A": "伴随",
-    "B": "to accompany, to follow"
-  },
-  {
-    "A": "日益",
-    "B": "day by day, increasingly"
-  },
-  {
-    "A": "昔日",
-    "B": "former times, bygone days"
-  },
-  {
-    "A": "倒闭",
-    "B": "to go bankrupt"
-  },
-  {
-    "A": "盈利",
-    "B": "to make a profit"
-  },
-  {
-    "A": "运行",
-    "B": "to run, to operate"
-  },
-  {
-    "A": "裁员",
-    "B": "to lay off employee"
-  },
-  {
-    "A": "意味着",
-    "B": "to mean, to imply"
-  },
-  {
-    "A": "以致",
-    "B": "consequently, as a result"
-  },
-  {
-    "A": "饱和",
-    "B": "to be saturated, to be filled"
-  },
-  {
-    "A": "及早",
-    "B": "as soon as possible, before it is too late"
-  },
-  {
-    "A": "机遇",
-    "B": "opportunity, luck"
-  },
-  {
-    "A": "免疫",
-    "B": "to be immunue"
-  },
-  {
-    "A": "决策",
-    "B": "to make a strategic decision"
-  },
-  {
-    "A": "土壤",
-    "B": "Soil"
-  },
-  {
-    "A": "陡峭",
-    "B": "Steep, Precipious"
-  },
-  {
-    "A": "茂盛",
-    "B": "Luxuriant, exuberant"
-  },
-  {
-    "A": "悬挂",
-    "B": "to hang, to suspend"
-  },
-  {
-    "A": "负担",
-    "B": "to bear, to shoulder"
-  },
-  {
-    "A": "坠",
-    "B": "to fall, to drop"
-  },
-  {
-    "A": "吊",
-    "B": "to hang, to suspend, to dangle"
-  },
-  {
-    "A": "点缀",
-    "B": "to decorate, to adorn"
-  },
-  {
-    "A": "协调",
-    "B": "coordinated, harmonious"
-  },
-  {
-    "A": "连同",
-    "B": "together with, along with"
-  },
-  {
-    "A": "断定",
-    "B": "to form judgement, to conclude"
-  },
-  {
-    "A": "晃",
-    "B": "to shake, to sway"
-  },
-  {
-    "A": "节制",
-    "B": "to control, to check"
-  },
-  {
-    "A": "沉重",
-    "B": "heavy"
-  },
-  {
-    "A": "分量",
-    "B": "weight"
-  },
-  {
-    "A": "柔和",
-    "B": "mild, gentle, soft"
-  },
-  {
-    "A": "水泥",
-    "B": "cement"
-  },
-  {
-    "A": "覆盖",
-    "B": "to cover"
-  },
-  {
-    "A": "照耀",
-    "B": "to shine, to illuminate"
-  },
-  {
-    "A": "滋润",
-    "B": "to moisten"
-  },
-  {
-    "A": "疲倦",
-    "B": "tired, weary"
-  },
-  {
-    "A": "随机",
-    "B": "Immediately, presently"
-  },
-  {
-    "A": "端",
-    "B": "to hold (sth), to level with both hand, to carry"
-  },
-  {
-    "A": "瞄准",
-    "B": "to take aim, to aim at"
-  },
-  {
-    "A": "迟钝",
-    "B": "slow witted, obtuse"
-  },
-  {
-    "A": "盛",
-    "B": "to hold, to contain"
-  },
-  {
-    "A": "颤抖",
-    "B": "to tremble, to shiver"
-  },
-  {
-    "A": "庞大",
-    "B": "huge, enormous"
-  },
-  {
-    "A": "企图",
-    "B": "to try, to attempt"
-  },
-  {
-    "A": "视线",
-    "B": "line of vision, line of sight"
-  },
-  {
-    "A": "跳跃",
-    "B": "to jump, to leap"
-  },
-  {
-    "A": "间隔",
-    "B": "interval, intermission"
-  },
-  {
-    "A": "姑且",
-    "B": "fo the moment, tentatively"
-  },
-  {
-    "A": "笨拙",
-    "B": "clumsy, stupid"
-  },
-  {
-    "A": "闪烁",
-    "B": "to twinkle, to flicker, to glitter"
-  },
-  {
-    "A": "实力",
-    "B": "vision, eyesight"
-  },
-  {
-    "A": "文雅",
-    "B": "elegant, refined, polished"
-  },
-  {
-    "A": "新陈代谢 （代谢） ",
-    "B": "metabolism"
-  },
-  {
-    "A": "名次",
-    "B": "ranking, place in a competition"
-  },
-  {
-    "A": "推论",
-    "B": "to infer, to deduce"
-  },
-  {
-    "A": "实惠",
-    "B": "practical, affordable, substantial"
-  },
-  {
-    "A": "渺小",
-    "B": "tiny, insgnificant"
-  },
-  {
-    "A": "焦急",
-    "B": "anxious, agitated"
-  },
-  {
-    "A": "系列",
-    "B": "series, set"
-  },
-  {
-    "A": "深奥",
-    "B": "deep, abstruse"
-  },
-  {
-    "A": "标记",
-    "B": "to mark, to label"
-  },
-  {
-    "A": "论证",
-    "B": "to expound and prove"
-  },
-  {
-    "A": "苍蝇",
-    "B": "fly"
-  }
+
+{
+"Chapter 1" : [
+    { "A": "爽快", "B": "Forthright" },
+    { "A": "和睦", "B": "On good term with" },
+    { "A": "融洽", "B": "Harmonious" },
+    { "A": "附和", "B": "To chime with" },
+    { "A": "忽略", "B": "ignore" },
+    { "A": "瞬间", "B": "instant" },
+    { "A": "勤劳", "B": "industrious, diligent" },
+    { "A": "佳肴", "B": "delicious food" },
+    { "A": "巴不得", "B": "to be eager" },
+    { "A": "嚷", "B": "to shout" },
+    { "A": "风度", "B": "demanor, manner" },
+    { "A": "别扭", "B": "to be on bad term" }
+],
+"Chapter 2": [
+  { "A": "片刻", "B": "instant" },
+  { "A": "刹那", "B": "moment, split second" },
+  { "A": "顿时", "B": "instant, moment" },
+  { "A": "近来", "B": "recently, lately" },
+  { "A": "唠叨", "B": "to chatter with" },
+  { "A": "诱惑", "B": "to entice, to tempt" },
+  { "A": "跨", "B": "to step, to stride" },
+  { "A": "团圆", "B": "to unite" },
+  { "A": "和蔼", "B": "kindly, amiable" },
+  { "A": "体谅", "B": "to show sympathy" },
+  { "A": "隐瞒", "B": "to conceal" },
+  { "A": "掩饰", "B": "to conceal" },
+  { "A": "埋怨", "B": "to blame, to complain" },
+  { "A": "反常", "B": "unusual, abnormal" },
+  { "A": "熬", "B": "to endure" },
+  { "A": "酝酿", "B": "to ferment" }
+],
+"Chapter 3": [
+  { "A": "迎面", "B": "Face to face" },
+  { "A": "迟疑", "B": "Hesitate" },
+  { "A": "打量", "B": "To look up and down" },
+  { "A": "搓", "B": "To rub ones hand" },
+  { "A": "流露", "B": "To reveal unintentionally" },
+  { "A": "过于", "B": "Too, Exceedingly" },
+  { "A": "斯文", "B": "gentle, refine" },
+  { "A": "操劳", "B": "Diligent" },
+  { "A": "朴实", "B": "Honest" },
+  { "A": "信誉", "B": "Credit, Reputation" },
+  { "A": "欺骗", "B": "To cheat" },
+  { "A": "喜悦", "B": "Delightful, joyous" },
+  { "A": "拨", "B": "To dial" },
+  { "A": "隐约", "B": "Vague, Indistinct" },
+  { "A": "仍旧", "B": "Still, as ever" },
+  { "A": "惦记", "B": "To keep thinking about" },
+  { "A": "辜负", "B": "To fail to live up to" },
+  { "A": "炫耀", "B": "To flaunt, to show off" },
+  { "A": "灿烂", "B": "magnificent, splendid" }
+],
+"Chapter 4": [
+  { "A": "不料", "B": "unexpectedly, to one's surprise" },
+  { "A": "未免", "B": "rather, a bit too" },
+  { "A": "厌恶", "B": "hateful, detestable" },
+  { "A": "悲惨", "B": "to despise, to look down upon" },
+  { "A": "喘气", "B": "to breathe deeply, to gasp, to pant" },
+  { "A": "猛烈", "B": "fierce, violent" },
+  { "A": "打猎", "B": "to hunt, to go hunting" },
+  { "A": "毫无", "B": "in the least, without" },
+  { "A": "弊端", "B": "disadvantage, drawback" },
+  { "A": "无非", "B": "nothing but, no more than" },
+  { "A": "动力", "B": "motivation, impetus" },
+  { "A": "涉及", "B": "to involve, to relate to" },
+  { "A": "借助", "B": "to have aid of, to draw support from" },
+  { "A": "不顾", "B": "in spite of, regardless" },
+  { "A": "可恶", "B": "to detest, to loathe" },
+  { "A": "乘", "B": "to avail oneself of, to take advantage of" },
+  { "A": "盯", "B": "to stare at, to fix one's eyes" },
+  { "A": "饶恕", "B": "to forgive, to pardon" },
+  { "A": "耍", "B": "to play, to behave" },
+  { "A": "窜", "B": "to flee, to scurry" },
+  { "A": "倘若", "B": "if supposing" },
+  { "A": "恰巧", "B": "by chance" },
+  { "A": "蔑视", "B": "hateful, tragic" },
+  { "A": "强迫", "B": "to force" },
+  { "A": "夕阳", "B": "setting sun" },
+  { "A": "摆脱", "B": "to get rid of, to break away" },
+  { "A": "草率", "B": "careless, rash" },
+  { "A": "耗费", "B": "use, to consume" }
+],
+"Chapter 5": [
+  { "A": "搁", "B": "To put, to place" },
+  { "A": "执行", "B": "To carry out, to implement" },
+  { "A": "设置", "B": "To set up, Established" },
+  { "A": "机构", "B": "Organization, institution" },
+  { "A": "固然", "B": "admittedly, it is true" },
+  { "A": "勉强", "B": "to manage with effort, to do with difficulty" },
+  { "A": "隐私", "B": "privacy" },
+  { "A": "崩溃", "B": "to collapse, to fall apart" },
+  { "A": "反感", "B": "disgusted" }
+],
+"Chapter 6": [
+  { "A": "敬业", "B": "to dedicate oneself to work" },
+  { "A": "传授", "B": "to teach, to impart" },
+  { "A": "吹牛", "B": "to boast, to brag" },
+  { "A": "溜", "B": "to sneak away" },
+  { "A": "激情", "B": "passion" },
+  { "A": "才干", "B": "talent, ability" },
+  { "A": "计较", "B": "to keep account of" },
+  { "A": "投诉", "B": "complain" },
+  { "A": "大不了", "B": "at the worst" },
+  { "A": "指标", "B": "index, norm, target" },
+  { "A": "边缘", "B": "edge, margin" },
+  { "A": "搭档", "B": "partner" },
+  { "A": "成天", "B": "all day long" },
+  { "A": "当初", "B": "at the beginning" },
+  { "A": "创立", "B": "establish, to set up" },
+  { "A": "怠慢", "B": "to give slight shoulder, cold shoulder" },
+  { "A": "凑合", "B": "to do something half-heartedly" }
+],
+"Chapter 7": [
+  { "A": "做主", "B": "To decide, To make one's own decision" },
+  { "A": "枯燥", "B": "dull, uninteresting" },
+  { "A": "擅长", "B": "to be good at, to be expert in" },
+  { "A": "急躁", "B": "irritable, hot-tempered" },
+  { "A": "顾虑", "B": "misgiving, worry" },
+  { "A": "致使", "B": "to cause, to lead to" },
+  { "A": "终身", "B": "lifetime, all one's life" },
+  { "A": "并非", "B": "not to be, not" },
+  { "A": "精确", "B": "accurate, precise" },
+  { "A": "挫折", "B": "setback, defeat" },
+  { "A": "意志", "B": "will, willpower" },
+  { "A": "畏惧", "B": "to fear, to dread" },
+  { "A": "伴随", "B": "to accompany, to follow" },
+  { "A": "日益", "B": "day by day, increasingly" },
+  { "A": "昔日", "B": "former times, bygone days" },
+  { "A": "倒闭", "B": "to go bankrupt" },
+  { "A": "盈利", "B": "to make a profit" },
+  { "A": "运行", "B": "to run, to operate" },
+  { "A": "裁员", "B": "to lay off employees" },
+  { "A": "意味着", "B": "to mean, to imply" },
+  { "A": "以致", "B": "consequently, as a result" },
+  { "A": "饱和", "B": "to be saturated, to be filled" },
+  { "A": "及早", "B": "as soon as possible, before it is too late" },
+  { "A": "机遇", "B": "opportunity, luck" },
+  { "A": "免疫", "B": "to be immune" },
+  { "A": "决策", "B": "to make a strategic decision" }
+],
+"Chapter 17": [
+  { "A": "端", "B": "to hold (sth), to level with both hands, to carry" },
+  { "A": "瞄准", "B": "to take aim, to aim at" },
+  { "A": "迟钝", "B": "slow-witted, obtuse" },
+  { "A": "盛", "B": "to hold, to contain" },
+  { "A": "颤抖", "B": "to tremble, to shiver" },
+  { "A": "庞大", "B": "huge, enormous" },
+  { "A": "企图", "B": "to try, to attempt" },
+  { "A": "视线", "B": "line of vision, line of sight" },
+  { "A": "跳跃", "B": "to jump, to leap" },
+  { "A": "间隔", "B": "interval, intermission" },
+  { "A": "姑且", "B": "for the moment, tentatively" },
+  { "A": "笨拙", "B": "clumsy, stupid" },
+  { "A": "闪烁", "B": "to twinkle, to flicker, to glitter" },
+  { "A": "实力", "B": "strength, capability" },
+  { "A": "文雅", "B": "elegant, refined, polished" },
+  { "A": "新陈代谢 （代谢）", "B": "metabolism" },
+  { "A": "名次", "B": "ranking, place in a competition" },
+  { "A": "推论", "B": "to infer, to deduce" },
+  { "A": "实惠", "B": "practical, affordable, substantial" },
+  { "A": "渺小", "B": "tiny, insignificant" },
+  { "A": "焦急", "B": "anxious, agitated" },
+  { "A": "系列", "B": "series, set" },
+  { "A": "深奥", "B": "deep, abstruse" },
+  { "A": "标记", "B": "to mark, to label" },
+  { "A": "论证", "B": "to expound and prove" },
+  { "A": "苍蝇", "B": "fly" }
+],
+"Chapter 18": [
+  { "A": "土壤", "B": "Soil" },
+  { "A": "陡峭", "B": "Steep, Precipitous" },
+  { "A": "茂盛", "B": "Luxuriant, exuberant" },
+  { "A": "悬挂", "B": "to hang, to suspend" },
+  { "A": "负担", "B": "to bear, to shoulder" },
+  { "A": "坠", "B": "to fall, to drop" },
+  { "A": "吊", "B": "to hang, to suspend, to dangle" },
+  { "A": "点缀", "B": "to decorate, to adorn" },
+  { "A": "协调", "B": "coordinated, harmonious" },
+  { "A": "连同", "B": "together with, along with" },
+  { "A": "断定", "B": "to form judgement, to conclude" },
+  { "A": "晃", "B": "to shake, to sway" },
+  { "A": "节制", "B": "to control, to check" },
+  { "A": "沉重", "B": "heavy" },
+  { "A": "分量", "B": "weight" },
+  { "A": "柔和", "B": "mild, gentle, soft" },
+  { "A": "水泥", "B": "cement" },
+  { "A": "覆盖", "B": "to cover" },
+  { "A": "照耀", "B": "to shine, to illuminate" },
+  { "A": "滋润", "B": "to moisten" },
+  { "A": "疲倦", "B": "tired, weary" },
+  { "A": "随机", "B": "Immediately, presently" }
+],
+"Chapter 19": [
+  { "A": "过滤", "B": "To filter, Filterate" },
+  { "A": "历来", "B": "All through ages, always" },
+  { "A": "丧失", "B": "To lose, forfeit" },
+  { "A": "忍受", "B": "Endure" },
+  { "A": "滋味", "B": "Taste, Flavor" },
+  { "A": "认定", "B": "To firmly believe" }
+],
+"Chapter 20": [
+  { "A": "争夺", "B": "To fight for" },
+  { "A": "将近", "B": "Approximately" },
+  { "A": "进而", "B": "And then" },
+  { "A": "况且", "B": "Moreover, in addition" },
+  { "A": "宁肯", "B": "Would rather" },
+  { "A": "颇", "B": "Quite" },
+  { "A": "拣", "B": "Pick up" },
+  { "A": "维持", "B": "To preserve, to maintain" },
+  { "A": "分裂", "B": "To split, to divide" },
+  { "A": "跟随", "B": "Follow" },
+  { "A": "寻觅", "B": "To look for, seek for" },
+  { "A": "夸张", "B": "Exaggeration" },
+  { "A": "分明", "B": "Clearly, plainly" },
+  { "A": "贪婪", "B": "Greedy" }
 ]
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Test (English → Chinese)</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      padding: 20px; 
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 { 
+      color: #444; 
+      margin-bottom: 20px; 
+    }
+    .word { 
+      font-size: 2em; 
+      margin: 15px 0; 
+      color: #1a73e8; 
+      word-break: break-word;
+    }
+    input { 
+      font-size: 1.2em; 
+      padding: 8px; 
+      width: 70%; 
+      max-width: 300px; 
+      border-radius: 5px; 
+      border: 1px solid #ccc; 
+      margin-bottom: 10px;
+    }
+    button { 
+      padding: 10px 18px; 
+      font-size: 1.1em; 
+      border-radius: 5px; 
+      border: none; 
+      background-color: #1a73e8; 
+      color: white; 
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    button:hover {
+      background-color: #155ab6;
+    }
+    .status { 
+      margin-top: 15px; 
+      font-weight: bold; 
+      font-size: 1.1em; 
+    }
+    table { 
+      margin: 20px auto; 
+      border-collapse: collapse; 
+      width: 90%; 
+      max-width: 500px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      font-size: 0.95em; 
+    }
+    th { 
+      background-color: #1a73e8; 
+      color: white; 
+    }
+    @media (max-width: 500px) {
+      .word { font-size: 1.5em; }
+      input { width: 80%; font-size: 1em; }
+      button { font-size: 1em; padding: 8px 12px; }
+      table { width: 100%; font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Vocabulary Test</h1>
+  
+  <div>
+    <span>Translate this word to Chinese:</span>
+    <div class="word" id="word"></div>
+  </div>
+  
+  <input type="text" id="answer" placeholder="Type Chinese here">
+  <button onclick="checkAnswer()">Check</button>
+  
+  <div class="status" id="status"></div>
+
+  <table id="wrongTable">
+    <thead>
+      <tr>
+        <th>English Word</th>
+        <th>Your Answer</th>
+        <th>Correct Answer</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let vocab = [];
+    let usedIndices = new Set();
+    let current = {};
+
+    // Load JSON
+    fetch('HSK 6.json')
+      .then(res => res.json())
+      .then(data => {
+        vocab = data;
+        showRandomWord();
+      })
+      .catch(err => console.error("Error loading JSON:", err));
+
+    function showRandomWord() {
+      if (usedIndices.size === vocab.length) {
+        document.getElementById('word').textContent = "🎉 You completed all words!";
+        document.getElementById('answer').disabled = true;
+        document.getElementById('status').textContent = '';
+        return;
+      }
+
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * vocab.length);
+      } while (usedIndices.has(randomIndex));
+
+      usedIndices.add(randomIndex);
+      current = vocab[randomIndex];
+
+      document.getElementById('word').textContent = current.B;
+      document.getElementById('answer').value = '';
+      document.getElementById('status').textContent = '';
+      document.getElementById('answer').focus();
+    }
+
+    function checkAnswer() {
+      const userInput = document.getElementById('answer').value.trim();
+      if (!userInput) {
+        document.getElementById('status').textContent = "⚠️ Please type an answer!";
+        return;
+      }
+
+      const correctAnswer = current.A.trim();
+      if (userInput === correctAnswer) {
+        document.getElementById('status').textContent = "✅ Correct!";
+      } else {
+        document.getElementById('status').textContent = `❌ Wrong. Correct answer: ${correctAnswer}`;
+        addWrongWord(current.B, userInput, correctAnswer);
+      }
+
+      setTimeout(showRandomWord, 1500);
+    }
+
+    function addWrongWord(english, userAnswer, correctAnswer) {
+      const tableBody = document.querySelector("#wrongTable tbody");
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${english}</td><td>${userAnswer}</td><td>${correctAnswer}</td>`;
+      row.style.backgroundColor = "#ffe6e6"; // redish background for wrong
+      tableBody.appendChild(row);
+    }
+  </script>
+</body>
+</html>

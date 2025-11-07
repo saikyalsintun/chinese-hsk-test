@@ -12,65 +12,21 @@
       background-color: #f9f9f9;
       color: #333;
     }
-    h1 { 
-      color: #444; 
-      margin-bottom: 20px; 
-    }
-    .word { 
-      font-size: 2em; 
-      margin: 15px 0; 
-      color: #1a73e8; 
-      word-break: break-word;
-    }
-    .counter {
-      margin: 10px 0;
-      font-size: 1em;
-      color: #555;
-    }
+    h1 { color: #444; margin-bottom: 20px; }
+    select { padding: 8px; font-size: 1em; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; }
+    .word { font-size: 2em; margin: 15px 0; color: #1a73e8; word-break: break-word; }
     input { 
-      font-size: 1.2em; 
-      padding: 8px; 
-      width: 70%; 
-      max-width: 300px; 
-      border-radius: 5px; 
-      border: 1px solid #ccc; 
-      margin-bottom: 10px;
+      font-size: 1.2em; padding: 8px; width: 70%; max-width: 300px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;
     }
     button { 
-      padding: 10px 18px; 
-      font-size: 1.1em; 
-      border-radius: 5px; 
-      border: none; 
-      background-color: #1a73e8; 
-      color: white; 
-      cursor: pointer;
-      margin-left: 5px;
+      padding: 10px 18px; font-size: 1.1em; border-radius: 5px; border: none; background-color: #1a73e8; color: white; cursor: pointer; margin-left: 5px;
     }
-    button:hover {
-      background-color: #155ab6;
-    }
-    .status { 
-      margin-top: 15px; 
-      font-weight: bold; 
-      font-size: 1.1em; 
-    }
-    table { 
-      margin: 20px auto; 
-      border-collapse: collapse; 
-      width: 90%; 
-      max-width: 500px;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    th, td { 
-      border: 1px solid #ddd; 
-      padding: 8px; 
-      font-size: 0.95em; 
-    }
-    th { 
-      background-color: #1a73e8; 
-      color: white; 
-    }
+    button:hover { background-color: #155ab6; }
+    .status { margin-top: 15px; font-weight: bold; font-size: 1.1em; }
+    table { margin: 20px auto; border-collapse: collapse; width: 90%; max-width: 500px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    th, td { border: 1px solid #ddd; padding: 8px; font-size: 0.95em; }
+    th { background-color: #1a73e8; color: white; }
+    .counter { margin-top: 10px; font-weight: bold; }
     @media (max-width: 500px) {
       .word { font-size: 1.5em; }
       input { width: 80%; font-size: 1em; }
@@ -82,16 +38,18 @@
 <body>
   <h1>Vocabulary Test</h1>
   
-  <div>
-    <span>Translate this word to Chinese:</span>
-    <div class="word" id="word"></div>
-    <div class="counter" id="counter">0 / 0 words completed</div>
-  </div>
+  <label for="chapterSelect">Choose a Chapter:</label>
+  <select id="chapterSelect" onchange="loadChapter()">
+    <option value="">-- Select Chapter --</option>
+  </select>
+
+  <div class="word" id="word"></div>
   
   <input type="text" id="answer" placeholder="Type Chinese here">
   <button onclick="checkAnswer()">Check</button>
   
   <div class="status" id="status"></div>
+  <div class="counter" id="counter"></div>
 
   <table id="wrongTable">
     <thead>
@@ -105,31 +63,49 @@
   </table>
 
   <script>
+    let vocabData = {};
     let vocab = [];
     let usedIndices = new Set();
     let current = {};
+    let totalWords = 0;
 
     // Load JSON
-    fetch('HSK 6.json')
+    fetch('HSK 6.json')  // Your cleaned JSON file with all chapters
       .then(res => res.json())
       .then(data => {
-        vocab = data;
-        updateCounter();
-        showRandomWord();
+        vocabData = data;
+        populateChapterDropdown();
       })
       .catch(err => console.error("Error loading JSON:", err));
 
-    function updateCounter() {
-      document.getElementById('counter').textContent = 
-        `${usedIndices.size} / ${vocab.length} words completed`;
+    // Populate chapter dropdown
+    function populateChapterDropdown() {
+      const select = document.getElementById('chapterSelect');
+      Object.keys(vocabData).forEach(chapter => {
+        const option = document.createElement('option');
+        option.value = chapter;
+        option.textContent = chapter;
+        select.appendChild(option);
+      });
+    }
+
+    function loadChapter() {
+      const selected = document.getElementById('chapterSelect').value;
+      if (!selected) return;
+      
+      vocab = vocabData[selected];
+      usedIndices.clear();
+      totalWords = vocab.length;
+      document.getElementById('wrongTable').querySelector('tbody').innerHTML = '';
+      showRandomWord();
     }
 
     function showRandomWord() {
       if (usedIndices.size === vocab.length) {
-        document.getElementById('word').textContent = "🎉 You completed all words!";
+        document.getElementById('word').textContent = "🎉 You completed all words in this chapter!";
         document.getElementById('answer').disabled = true;
         document.getElementById('status').textContent = '';
-        updateCounter();
+        document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
         return;
       }
 
@@ -140,10 +116,10 @@
 
       usedIndices.add(randomIndex);
       current = vocab[randomIndex];
-
       document.getElementById('word').textContent = current.B;
       document.getElementById('answer').value = '';
       document.getElementById('status').textContent = '';
+      document.getElementById('answer').disabled = false;
       document.getElementById('answer').focus();
       updateCounter();
     }
@@ -170,8 +146,12 @@
       const tableBody = document.querySelector("#wrongTable tbody");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${english}</td><td>${userAnswer}</td><td>${correctAnswer}</td>`;
-      row.style.backgroundColor = "#ffe6e6"; // redish background for wrong
+      row.style.backgroundColor = "#ffe6e6"; 
       tableBody.appendChild(row);
+    }
+
+    function updateCounter() {
+      document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
     }
   </script>
 </body>

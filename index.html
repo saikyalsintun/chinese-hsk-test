@@ -11,20 +11,29 @@
       padding: 20px; 
       background-color: #f7f9fc;
       color: #333;
+      transition: background-color 0.3s, color 0.3s;
     }
+    body.dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
     h1 { 
       color: #222; 
       margin-bottom: 20px; 
       font-weight: 600;
     }
+    body.dark-mode h1 { color: #fff; }
 
     /* Menu bar */
     .menu {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 10px;
       margin-bottom: 25px;
       flex-wrap: wrap;
+      position: relative;
     }
     .menu button {
       padding: 10px 18px;
@@ -45,10 +54,18 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
+    /* Dark mode icon */
+    .dark-mode-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+    .dark-mode-icon:hover { transform: rotate(20deg); }
+
     select, input, button {
       font-size: 1em;
     }
-
     select { 
       padding: 8px; 
       margin: 10px 0 15px; 
@@ -75,9 +92,12 @@
       margin: 20px auto; border-collapse: collapse; width: 90%; max-width: 500px; 
       background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); 
       border-radius: 8px; overflow: hidden;
+      transition: background-color 0.3s, color 0.3s;
     }
+    body.dark-mode table { background-color: #1e1e1e; color: #f1f1f1; }
     th, td { border: 1px solid #ddd; padding: 8px; font-size: 0.95em; }
     th { background-color: #1a73e8; color: white; }
+    body.dark-mode th { background-color: #0b5ed7; }
 
     /* Paragraph section */
     .paragraph-card {
@@ -91,9 +111,10 @@
       font-size: 1.1em;
       line-height: 1.8;
       color: #333;
-      animation: fadeIn 0.5s ease-in;
       white-space: pre-wrap;
+      transition: background-color 0.3s, color 0.3s;
     }
+    body.dark-mode .paragraph-card { background-color: #1e1e1e; color: #f1f1f1; }
 
     /* Conversation chat bubbles */
     .chat-container {
@@ -110,25 +131,13 @@
       font-size: 1.05em;
       max-width: 80%;
       line-height: 1.6;
-      animation: fadeIn 0.5s ease;
       word-wrap: break-word;
+      transition: background-color 0.3s, color 0.3s;
     }
-    .bubble.xiaoli {
-      background-color: #e8f0fe;
-      align-self: flex-start;
-    }
-    .bubble.xiaowang {
-      background-color: #d1ecf1;
-      align-self: flex-end;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section { display: none; }
-    .visible { display: block; }
+    .bubble.xiaoli { background-color: #e8f0fe; align-self: flex-start; }
+    .bubble.xiaowang { background-color: #d1ecf1; align-self: flex-end; }
+    body.dark-mode .bubble.xiaoli { background-color: #2a2a72; color: #fff; }
+    body.dark-mode .bubble.xiaowang { background-color: #2a7272; color: #fff; }
 
     @media (max-width: 600px) {
       .word { font-size: 1.5em; }
@@ -145,7 +154,8 @@
     <button id="menu-vocab" class="active" onclick="showSection('vocab')">Vocabulary Test</button>
     <button id="menu-paragraph" onclick="showSection('paragraph')">Paragraph</button>
     <button id="menu-conversation" onclick="showSection('conversation')">Conversation</button>
-    <button id="menu-vocabList" onclick="showSection('vocabList')">Vocabulary List</button>
+    <button onclick="showSection('vocabList')">Vocabulary List</button>
+    <span class="dark-mode-icon" onclick="toggleDarkMode()">🌙</span>
   </div>
 
   <!-- Vocabulary Test Section -->
@@ -195,16 +205,18 @@
   </div>
 
   <!-- Vocabulary List Section -->
-  <div id="vocabList" class="section">
-    <!-- Will be populated dynamically -->
-  </div>
+  <div id="vocabList" class="section"></div>
 
   <script>
-    // Data
     let vocabData = {}, paragraphData = {}, conversationData = {};
     let vocab = [], usedIndices = new Set(), current = {}, totalWords = 0;
 
-    // Load all JSON files
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    // Load JSON
     Promise.all([
       fetch('HSK 6.json').then(res => res.json()),
       fetch('Paragraph.json').then(res => res.json()),
@@ -218,22 +230,20 @@
     })
     .catch(err => console.error("Error loading JSON:", err));
 
-    // Show section
     function showSection(sectionId) {
       document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
       document.getElementById(sectionId).style.display = 'block';
       document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-      document.getElementById(`menu-${sectionId}`).classList.add('active');
+      const btnMap = { vocab: 'menu-vocab', paragraph: 'menu-paragraph', conversation: 'menu-conversation' };
+      if(btnMap[sectionId]) document.getElementById(btnMap[sectionId]).classList.add('active');
       if(sectionId === 'vocabList') loadVocabList();
     }
 
-    // Populate all dropdowns
     function populateDropdowns() {
       populateDropdown('chapterSelect', vocabData);
       populateDropdown('paragraphSelect', paragraphData);
       populateDropdown('conversationSelect', conversationData);
     }
-
     function populateDropdown(id, data) {
       const select = document.getElementById(id);
       Object.keys(data).forEach(chapter => {
@@ -244,7 +254,7 @@
       });
     }
 
-    // Vocabulary Test Functions
+    // Vocabulary Test
     function loadChapter() {
       const selected = document.getElementById('chapterSelect').value;
       if (!selected) return;
@@ -324,11 +334,10 @@
       });
     }
 
-    // Vocabulary List - divided by chapters
+    // Vocabulary List
     function loadVocabList() {
       const container = document.getElementById('vocabList');
       container.innerHTML = '<h2>Vocabulary List (HSK 6)</h2>';
-
       for (const chapter in vocabData) {
         const chapterHeading = document.createElement('h3');
         chapterHeading.textContent = chapter;

@@ -145,6 +145,7 @@
     <button id="menu-vocab" class="active" onclick="showSection('vocab')">Vocabulary Test</button>
     <button id="menu-paragraph" onclick="showSection('paragraph')">Paragraph</button>
     <button id="menu-conversation" onclick="showSection('conversation')">Conversation</button>
+    <button id="menu-vocabList" onclick="showSection('vocabList')">Vocabulary List</button>
   </div>
 
   <!-- Vocabulary Test Section -->
@@ -193,10 +194,17 @@
     <div id="conversationText" class="chat-container"></div>
   </div>
 
-  <script>
-    let vocabData = {}, vocab = [], usedIndices = new Set(), current = {}, totalWords = 0;
-    let paragraphData = {}, conversationData = {};
+  <!-- Vocabulary List Section -->
+  <div id="vocabList" class="section">
+    <!-- Will be populated dynamically -->
+  </div>
 
+  <script>
+    // Data
+    let vocabData = {}, paragraphData = {}, conversationData = {};
+    let vocab = [], usedIndices = new Set(), current = {}, totalWords = 0;
+
+    // Load all JSON files
     Promise.all([
       fetch('HSK 6.json').then(res => res.json()),
       fetch('Paragraph.json').then(res => res.json()),
@@ -210,13 +218,16 @@
     })
     .catch(err => console.error("Error loading JSON:", err));
 
-    function showSection(section) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-      document.getElementById(section).classList.add('visible');
+    // Show section
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
       document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-      document.getElementById(`menu-${section}`).classList.add('active');
+      document.getElementById(`menu-${sectionId}`).classList.add('active');
+      if(sectionId === 'vocabList') loadVocabList();
     }
 
+    // Populate all dropdowns
     function populateDropdowns() {
       populateDropdown('chapterSelect', vocabData);
       populateDropdown('paragraphSelect', paragraphData);
@@ -233,6 +244,7 @@
       });
     }
 
+    // Vocabulary Test Functions
     function loadChapter() {
       const selected = document.getElementById('chapterSelect').value;
       if (!selected) return;
@@ -251,11 +263,9 @@
         document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
         return;
       }
-
       let randomIndex;
       do { randomIndex = Math.floor(Math.random() * vocab.length); } 
       while (usedIndices.has(randomIndex));
-
       usedIndices.add(randomIndex);
       current = vocab[randomIndex];
       document.getElementById('word').textContent = current.B;
@@ -268,10 +278,7 @@
 
     function checkAnswer() {
       const userInput = document.getElementById('answer').value.trim();
-      if (!userInput) {
-        document.getElementById('status').textContent = "⚠️ Please type an answer!";
-        return;
-      }
+      if (!userInput) { document.getElementById('status').textContent = "⚠️ Please type an answer!"; return; }
       const correctAnswer = current.A.trim();
       if (userInput === correctAnswer) {
         document.getElementById('status').textContent = "✅ Correct!";
@@ -283,29 +290,29 @@
     }
 
     function addWrongWord(english, userAnswer, correctAnswer) {
-      const tableBody = document.querySelector("#wrongTable tbody");
+      const tbody = document.querySelector("#wrongTable tbody");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${english}</td><td>${userAnswer}</td><td>${correctAnswer}</td>`;
       row.style.backgroundColor = "#ffe6e6"; 
-      tableBody.appendChild(row);
+      tbody.appendChild(row);
     }
 
     function updateCounter() {
       document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
     }
 
+    // Paragraph
     function loadParagraph() {
       const selected = document.getElementById('paragraphSelect').value;
-      const card = document.getElementById('paragraphText');
-      card.textContent = selected ? paragraphData[selected] : '';
+      document.getElementById('paragraphText').textContent = selected ? paragraphData[selected] : '';
     }
 
+    // Conversation
     function loadConversation() {
       const selected = document.getElementById('conversationSelect').value;
       const container = document.getElementById('conversationText');
       container.innerHTML = '';
       if (!selected) return;
-
       const lines = conversationData[selected].split('\n');
       lines.forEach(line => {
         const bubble = document.createElement('div');
@@ -316,7 +323,38 @@
         container.appendChild(bubble);
       });
     }
+
+    // Vocabulary List - divided by chapters
+    function loadVocabList() {
+      const container = document.getElementById('vocabList');
+      container.innerHTML = '<h2>Vocabulary List (HSK 6)</h2>';
+
+      for (const chapter in vocabData) {
+        const chapterHeading = document.createElement('h3');
+        chapterHeading.textContent = chapter;
+        chapterHeading.style.marginTop = '20px';
+        container.appendChild(chapterHeading);
+
+        const table = document.createElement('table');
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>English</th>
+              <th>Chinese</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        `;
+        container.appendChild(table);
+
+        const tbody = table.querySelector('tbody');
+        vocabData[chapter].forEach(word => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${word.B}</td><td>${word.A}</td>`;
+          tbody.appendChild(row);
+        });
+      }
+    }
   </script>
 </body>
-  
 </html>

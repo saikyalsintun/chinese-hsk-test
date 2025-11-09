@@ -5,162 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Language Practice Hub</title>
   <style>
-    body { 
-      font-family: "Segoe UI", Arial, sans-serif; 
-      text-align: center; 
-      padding: 20px; 
-      background-color: #f7f9fc;
-      color: #333;
-      transition: background-color 0.3s, color 0.3s;
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f7f9fc; color:#333;
+      text-align:center;
+      transition:0.4s;
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; padding:20px;
     }
-    body.dark-mode {
-      background-color: #121212;
-      color: #f1f1f1;
-    }
+    body.dark-mode { background:#121212; color:#f1f1f1; }
+    h1 { font-weight:700; margin:15px 0 25px; }
 
-    h1 { 
-      color: #222; 
-      margin-bottom: 20px; 
-      font-weight: 600;
-    }
-    body.dark-mode h1 { color: #fff; }
-
-    /* Menu bar */
-    .menu {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-      position: relative;
-    }
+    .menu { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:25px; }
     .menu button {
-      padding: 10px 18px;
-      font-size: 1em;
-      border-radius: 8px;
-      border: none;
-      background-color: #1a73e8;
-      color: white;
-      cursor: pointer;
-      transition: 0.25s;
+      background:#1a73e8; color:white; border:none; border-radius:10px;
+      padding:10px 18px; cursor:pointer; font-size:1em; transition:0.25s;
     }
-    .menu button:hover {
-      background-color: #155ab6;
-      transform: translateY(-2px);
-    }
-    .menu button.active {
-      background-color: #0b5ed7;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+    .menu button.active { background:#0b5ed7; box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+    .menu button:hover { transform:translateY(-2px); }
+    .dark-mode-icon { font-size:1.6em; cursor:pointer; margin-left:5px; }
 
-    /* Dark mode icon */
-    .dark-mode-icon {
-      font-size: 1.5em;
-      cursor: pointer;
-      margin-left: 10px;
-      transition: transform 0.3s;
-    }
-    .dark-mode-icon:hover { transform: rotate(20deg); }
+    .section { display:none; width:100%; max-width:700px; margin-top:10px; }
+    .visible { display:block; }
 
-    select, input, button {
-      font-size: 1em;
-    }
-    select { 
-      padding: 8px; 
-      margin: 10px 0 15px; 
-      border-radius: 6px; 
-      border: 1px solid #ccc; 
-    }
+    .word { font-size:2em; margin:15px 0; color:#1a73e8; }
+    input { padding:8px; font-size:1.2em; width:70%; border-radius:6px; border:1px solid #ccc; margin-bottom:10px; }
+    button.action { background:#1a73e8; color:white; border:none; border-radius:6px; padding:10px 18px; font-size:1.1em; cursor:pointer; transition:0.25s; }
+    button.action:hover { background:#155ab6; }
+    .status { margin-top:10px; font-weight:bold; }
+    .counter { margin-top:8px; font-weight:bold; }
 
-    /* Vocabulary section */
-    .word { font-size: 2em; margin: 15px 0; color: #1a73e8; }
-    input { 
-      font-size: 1.2em; padding: 8px; width: 70%; max-width: 300px; 
-      border-radius: 6px; border: 1px solid #ccc; margin-bottom: 10px;
-    }
-    button.action { 
-      padding: 10px 18px; font-size: 1.1em; border-radius: 6px; 
-      border: none; background-color: #1a73e8; color: white; 
-      cursor: pointer; transition: 0.25s;
-    }
-    button.action:hover { background-color: #155ab6; }
-    .status { margin-top: 15px; font-weight: bold; font-size: 1.1em; }
-    .counter { margin-top: 10px; font-weight: bold; }
+    table { margin:20px auto; border-collapse:collapse; width:90%; max-width:500px; background:white; border-radius:8px; overflow:hidden; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    th, td { border:1px solid #ddd; padding:8px; font-size:0.95em; }
+    th { background:#1a73e8; color:white; }
+    body.dark-mode table { background:#1e1e1e; color:#f1f1f1; }
+    body.dark-mode th { background:#0b5ed7; }
 
-    table { 
-      margin: 20px auto; border-collapse: collapse; width: 90%; max-width: 500px; 
-      background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); 
-      border-radius: 8px; overflow: hidden;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark-mode table { background-color: #1e1e1e; color: #f1f1f1; }
-    th, td { border: 1px solid #ddd; padding: 8px; font-size: 0.95em; }
-    th { background-color: #1a73e8; color: white; }
-    body.dark-mode th { background-color: #0b5ed7; }
+    .paragraph-card { background:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); border-radius:10px; padding:20px; text-align:left; font-size:1.1em; line-height:1.8; color:#333; white-space:pre-wrap; margin-top:20px; }
+    body.dark-mode .paragraph-card { background:#1e1e1e; color:#f1f1f1; }
 
-    /* Paragraph section */
-    .paragraph-card {
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin: 20px auto;
-      max-width: 700px;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: left;
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #333;
-      white-space: pre-wrap;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark-mode .paragraph-card { background-color: #1e1e1e; color: #f1f1f1; }
+    .chat-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; text-align:left; }
+    .bubble { padding:12px 16px; border-radius:14px; max-width:80%; line-height:1.6; word-wrap:break-word; }
+    .xiaoli { background:#e8f0fe; align-self:flex-start; }
+    .xiaowang { background:#d1ecf1; align-self:flex-end; }
+    body.dark-mode .xiaoli { background:#2a2a72; color:white; }
+    body.dark-mode .xiaowang { background:#2a7272; color:white; }
 
-    /* Conversation chat bubbles */
-    .chat-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 700px;
-      margin: 20px auto;
-      text-align: left;
-    }
-    .bubble {
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-size: 1.05em;
-      max-width: 80%;
-      line-height: 1.6;
-      word-wrap: break-word;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .bubble.xiaoli { background-color: #e8f0fe; align-self: flex-start; }
-    .bubble.xiaowang { background-color: #d1ecf1; align-self: flex-end; }
-    body.dark-mode .bubble.xiaoli { background-color: #2a2a72; color: #fff; }
-    body.dark-mode .bubble.xiaowang { background-color: #2a7272; color: #fff; }
-
-    @media (max-width: 600px) {
-      .word { font-size: 1.5em; }
-      input { width: 85%; font-size: 1em; }
-      .bubble { font-size: 1em; }
-    }
+    @media (max-width:600px){ input{width:85%; font-size:1em;} .word{font-size:1.5em;} table{font-size:0.9em;} }
   </style>
 </head>
 <body>
   <h1>Language Practice Hub</h1>
 
-  <!-- Menu -->
   <div class="menu">
     <button id="menu-vocab" class="active" onclick="showSection('vocab')">Vocabulary Test</button>
     <button id="menu-paragraph" onclick="showSection('paragraph')">Paragraph</button>
     <button id="menu-conversation" onclick="showSection('conversation')">Conversation</button>
-    <button onclick="showSection('vocabList')">Vocabulary List</button>
+    <button id="menu-list" onclick="showSection('vocabList')">Vocabulary List</button>
+    <button id="menu-retry" onclick="showSection('retry')">Retry</button>
     <span class="dark-mode-icon" onclick="toggleDarkMode()">🌙</span>
   </div>
+  
 
-  <!-- Vocabulary Test Section -->
+  <!-- VOCAB TEST -->
   <div id="vocab" class="section visible">
-    <label for="chapterSelect">Choose a Chapter:</label>
+    <label>Choose a Chapter:</label>
     <select id="chapterSelect" onchange="loadChapter()">
       <option value="">-- Select Chapter --</option>
     </select>
@@ -168,201 +78,207 @@
     <div class="word" id="word"></div>
     <input type="text" id="answer" placeholder="Type Chinese here">
     <button class="action" onclick="checkAnswer()">Check</button>
-    
+
     <div class="status" id="status"></div>
     <div class="counter" id="counter"></div>
 
     <table id="wrongTable">
       <thead>
-        <tr>
-          <th>English Word</th>
-          <th>Your Answer</th>
-          <th>Correct Answer</th>
-        </tr>
+        <tr><th>English</th><th>Your Answer</th><th>Correct</th></tr>
       </thead>
       <tbody></tbody>
     </table>
   </div>
 
-  <!-- Paragraph Section -->
+  <!-- PARAGRAPH -->
   <div id="paragraph" class="section">
-    <h2>Chapter Paragraphs</h2>
-    <label for="paragraphSelect">Choose a Chapter:</label>
+    <h2>Paragraph Practice</h2>
     <select id="paragraphSelect" onchange="loadParagraph()">
       <option value="">-- Select Chapter --</option>
     </select>
     <div id="paragraphText" class="paragraph-card"></div>
   </div>
 
-  <!-- Conversation Section -->
+  <!-- CONVERSATION -->
   <div id="conversation" class="section">
     <h2>Conversation Practice</h2>
-    <label for="conversationSelect">Choose a Chapter:</label>
     <select id="conversationSelect" onchange="loadConversation()">
       <option value="">-- Select Chapter --</option>
     </select>
     <div id="conversationText" class="chat-container"></div>
   </div>
 
-  <!-- Vocabulary List Section -->
+  <!-- VOCAB LIST -->
   <div id="vocabList" class="section"></div>
+
+  <!-- RETRY SECTION -->
+  <div id="retry" class="section">
+    <h2>Retry Incorrect Words</h2>
+    <br/>
+    <button class="action" onclick="clearRetryHistory()">🗑️ Remove History</button>
+    <table id="retryTable">
+      <thead><tr><th>English</th><th>Correct Chinese</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <script>
     let vocabData = {}, paragraphData = {}, conversationData = {};
     let vocab = [], usedIndices = new Set(), current = {}, totalWords = 0;
+    let wrongWords = JSON.parse(localStorage.getItem('wrongWords') || '[]');
 
-    // Dark mode toggle
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
+    function toggleDarkMode(){ document.body.classList.toggle('dark-mode'); }
 
-    // Load JSON
+    // LOAD JSON FILES
     Promise.all([
-      fetch('HSK 6.json').then(res => res.json()),
-      fetch('Paragraph.json').then(res => res.json()),
-      fetch('Conversation.json').then(res => res.json())
+      fetch('HSK 6.json').then(r=>r.json()),
+      fetch('Paragraph.json').then(r=>r.json()),
+      fetch('Conversation.json').then(r=>r.json())
     ])
-    .then(([vocabJson, paragraphJson, conversationJson]) => {
-      vocabData = vocabJson;
-      paragraphData = paragraphJson;
-      conversationData = conversationJson;
+    .then(([v,p,c])=>{
+      vocabData=v; paragraphData=p; conversationData=c;
       populateDropdowns();
-    })
-    .catch(err => console.error("Error loading JSON:", err));
+      updateRetryTable();
+    });
 
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
-      document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-      const btnMap = { vocab: 'menu-vocab', paragraph: 'menu-paragraph', conversation: 'menu-conversation' };
-      if(btnMap[sectionId]) document.getElementById(btnMap[sectionId]).classList.add('active');
-      if(sectionId === 'vocabList') loadVocabList();
+    function populateDropdowns(){
+      populateDropdown('chapterSelect',vocabData);
+      populateDropdown('paragraphSelect',paragraphData);
+      populateDropdown('conversationSelect',conversationData);
     }
-
-    function populateDropdowns() {
-      populateDropdown('chapterSelect', vocabData);
-      populateDropdown('paragraphSelect', paragraphData);
-      populateDropdown('conversationSelect', conversationData);
-    }
-    function populateDropdown(id, data) {
-      const select = document.getElementById(id);
-      Object.keys(data).forEach(chapter => {
-        const option = document.createElement('option');
-        option.value = chapter;
-        option.textContent = chapter;
-        select.appendChild(option);
+    function populateDropdown(id,data){
+      const select=document.getElementById(id);
+      Object.keys(data).forEach(ch=>{
+        const o=document.createElement('option');
+        o.value=ch; o.textContent=ch;
+        select.appendChild(o);
       });
     }
 
-    // Vocabulary Test
-    function loadChapter() {
-      const selected = document.getElementById('chapterSelect').value;
-      if (!selected) return;
-      vocab = vocabData[selected];
+    function showSection(id){
+      document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+      document.getElementById(id).style.display='block';
+      document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
+      if(document.getElementById('menu-'+id)) document.getElementById('menu-'+id).classList.add('active');
+      if(id==='vocabList') loadVocabList();
+      if(id==='retry') updateRetryTable();
+    }
+
+    // VOCAB TEST
+    function loadChapter(){
+      const ch=document.getElementById('chapterSelect').value;
+      if(!ch) return;
+      vocab=vocabData[ch];
       usedIndices.clear();
-      totalWords = vocab.length;
-      document.getElementById('wrongTable').querySelector('tbody').innerHTML = '';
+      totalWords=vocab.length;
+      document.querySelector('#wrongTable tbody').innerHTML='';
       showRandomWord();
     }
-
-    function showRandomWord() {
-      if (usedIndices.size === vocab.length) {
-        document.getElementById('word').textContent = "🎉 You completed all words in this chapter!";
-        document.getElementById('answer').disabled = true;
-        document.getElementById('status').textContent = '';
-        document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
+    function showRandomWord(){
+      if(usedIndices.size===vocab.length){
+        document.getElementById('word').textContent="🎉 All words done!";
+        document.getElementById('answer').disabled=true;
         return;
       }
-      let randomIndex;
-      do { randomIndex = Math.floor(Math.random() * vocab.length); } 
-      while (usedIndices.has(randomIndex));
-      usedIndices.add(randomIndex);
-      current = vocab[randomIndex];
-      document.getElementById('word').textContent = current.B;
-      document.getElementById('answer').value = '';
-      document.getElementById('status').textContent = '';
-      document.getElementById('answer').disabled = false;
-      document.getElementById('answer').focus();
+      let i;
+      do{i=Math.floor(Math.random()*vocab.length);}while(usedIndices.has(i));
+      usedIndices.add(i);
+      current=vocab[i];
+      document.getElementById('word').textContent=current.B;
+      document.getElementById('answer').value='';
+      document.getElementById('answer').disabled=false;
+      document.getElementById('status').textContent='';
       updateCounter();
     }
-
-    function checkAnswer() {
-      const userInput = document.getElementById('answer').value.trim();
-      if (!userInput) { document.getElementById('status').textContent = "⚠️ Please type an answer!"; return; }
-      const correctAnswer = current.A.trim();
-      if (userInput === correctAnswer) {
-        document.getElementById('status').textContent = "✅ Correct!";
-      } else {
-        document.getElementById('status').textContent = `❌ Wrong. Correct answer: ${correctAnswer}`;
-        addWrongWord(current.B, userInput, correctAnswer);
+    function checkAnswer(){
+      const input=document.getElementById('answer').value.trim();
+      if(!input){document.getElementById('status').textContent="⚠️ Please type!";return;}
+      const correct=current.A.trim();
+      if(input===correct){ document.getElementById('status').textContent="✅ Correct!"; }
+      else{
+        document.getElementById('status').textContent=`❌ Wrong. Correct: ${correct}`;
+        addWrongWord(current.B,input,correct);
       }
-      setTimeout(showRandomWord, 1500);
+      setTimeout(showRandomWord,1500);
     }
-
-    function addWrongWord(english, userAnswer, correctAnswer) {
-      const tbody = document.querySelector("#wrongTable tbody");
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${english}</td><td>${userAnswer}</td><td>${correctAnswer}</td>`;
-      row.style.backgroundColor = "#ffe6e6"; 
+    function addWrongWord(eng,user,correct){
+      const tbody=document.querySelector('#wrongTable tbody');
+      const row=document.createElement('tr');
+      row.innerHTML=`<td>${eng}</td><td>${user}</td><td>${correct}</td>`;
+      row.style.backgroundColor="#ffe6e6";
       tbody.appendChild(row);
+
+      // Add to wrongWords only if not already present
+      if(!wrongWords.some(w=>w.English===eng)){
+        wrongWords.push({English:eng, Chinese:correct});
+        localStorage.setItem('wrongWords',JSON.stringify(wrongWords));
+      }
+    }
+    function updateCounter(){
+      document.getElementById('counter').textContent=`Words Completed: ${usedIndices.size}/${totalWords}`;
     }
 
-    function updateCounter() {
-      document.getElementById('counter').textContent = `Words Completed: ${usedIndices.size} / ${totalWords}`;
+    // PARAGRAPH
+    function loadParagraph(){
+      const ch=document.getElementById('paragraphSelect').value;
+      document.getElementById('paragraphText').textContent = ch ? paragraphData[ch] : '';
     }
 
-    // Paragraph
-    function loadParagraph() {
-      const selected = document.getElementById('paragraphSelect').value;
-      document.getElementById('paragraphText').textContent = selected ? paragraphData[selected] : '';
-    }
-
-    // Conversation
-    function loadConversation() {
-      const selected = document.getElementById('conversationSelect').value;
-      const container = document.getElementById('conversationText');
-      container.innerHTML = '';
-      if (!selected) return;
-      const lines = conversationData[selected].split('\n');
-      lines.forEach(line => {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        if (line.startsWith('小李')) bubble.classList.add('xiaoli');
-        else if (line.startsWith('小王')) bubble.classList.add('xiaowang');
-        bubble.textContent = line.trim();
-        container.appendChild(bubble);
+    // CONVERSATION
+    function loadConversation(){
+      const ch=document.getElementById('conversationSelect').value;
+      const container=document.getElementById('conversationText');
+      container.innerHTML='';
+      if(!ch)return;
+      conversationData[ch].split('\n').forEach(line=>{
+        const div=document.createElement('div');
+        div.classList.add('bubble');
+        if(line.startsWith('小李')) div.classList.add('xiaoli');
+        else if(line.startsWith('小王')) div.classList.add('xiaowang');
+        div.textContent=line.trim();
+        container.appendChild(div);
       });
     }
 
-    // Vocabulary List
-    function loadVocabList() {
-      const container = document.getElementById('vocabList');
-      container.innerHTML = '<h2>Vocabulary List (HSK 6)</h2>';
-      for (const chapter in vocabData) {
-        const chapterHeading = document.createElement('h3');
-        chapterHeading.textContent = chapter;
-        chapterHeading.style.marginTop = '20px';
-        container.appendChild(chapterHeading);
-
-        const table = document.createElement('table');
-        table.innerHTML = `
-          <thead>
-            <tr>
-              <th>English</th>
-              <th>Chinese</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        `;
-        container.appendChild(table);
-
-        const tbody = table.querySelector('tbody');
-        vocabData[chapter].forEach(word => {
-          const row = document.createElement('tr');
-          row.innerHTML = `<td>${word.B}</td><td>${word.A}</td>`;
-          tbody.appendChild(row);
+    // VOCAB LIST
+    function loadVocabList(){
+      const c=document.getElementById('vocabList');
+      c.innerHTML='<h2>Vocabulary List</h2>';
+      for(const ch in vocabData){
+        const h=document.createElement('h3');
+        h.textContent=ch; c.appendChild(h);
+        const t=document.createElement('table');
+        t.innerHTML='<thead><tr><th>English</th><th>Chinese</th></tr></thead><tbody></tbody>';
+        const tb=t.querySelector('tbody');
+        vocabData[ch].forEach(w=>{
+          const r=document.createElement('tr');
+          r.innerHTML=`<td>${w.B}</td><td>${w.A}</td>`;
+          tb.appendChild(r);
         });
+        c.appendChild(t);
       }
+    }
+
+    // RETRY SECTION
+    function updateRetryTable(){
+      const tbody=document.querySelector('#retryTable tbody');
+      tbody.innerHTML='';
+      const seen = new Set();
+      wrongWords.forEach(w=>{
+        if(!seen.has(w.English)){
+          seen.add(w.English);
+          const r=document.createElement('tr');
+          r.innerHTML=`<td>${w.English}</td><td>${w.Chinese}</td>`;
+          tbody.appendChild(r);
+        }
+      });
+    }
+
+    function clearRetryHistory(){
+      wrongWords=[];
+      localStorage.removeItem('wrongWords');
+      document.querySelector('#retryTable tbody').innerHTML='';
+      alert("✅ Retry history removed!");
     }
   </script>
 </body>

@@ -173,6 +173,39 @@
     { "A": "器官", "B": "organ, apparatus" },
     { "A": "器官分布图", "B": "organ distribution map" }
 ],
+
+"Chapter 14": [
+  {"A": "典型", "B": "typical, example, model"},
+  {"A": "高峰", "B": "peak, summit, height"},
+  {"A": "出身", "B": "background, one's previous experience, occupation"},
+  {"A": "灾难", "B": "disaster, catastrophe"},
+  {"A": "风暴", "B": "storm, tempest"},
+  {"A": "衣裳", "B": "clothing, clothes"},
+  {"A": "本能", "B": "instinct"},
+  {"A": "冲动", "B": "impulse"},
+  {"A": "开支", "B": "expenditure, spending"},
+  {"A": "储蓄", "B": "deposit, savings"},
+  {"A": "开拓", "B": "to open up, to exploit"},
+  {"A": "捆绑", "B": "to tie up"},
+  {"A": "释放", "B": "to release, to set free"},
+  {"A": "鼓动", "B": "to stir up, to spur, to incite"},
+  {"A": "遭遇", "B": "to come across, to encounter"},
+  {"A": "记载", "B": "to record, to put down in writing"},
+  {"A": "包装", "B": "to pack, to wrap, package, wrapper"},
+  {"A": "捕捉", "B": "to catch, to seize"},
+  {"A": "抢救", "B": "to rescue, to save"},
+  {"A": "穿越", "B": "to pass through, to cut across"},
+  {"A": "将就", "B": "to make do with, to put up with"},
+  {"A": "支配", "B": "to control, to dominate"},
+  {"A": "依然", "B": "resolutely, firmly"},
+  {"A": "毅力", "B": "will, determination, willpower"},
+  {"A": "免得", "B": "so as to avoid, so as not to"},
+  {"A": "疲惫", "B": "tired, weary"},
+  {"A": "惊奇", "B": "surprised, amazed"},
+  {"A": "潇洒", "B": "free and elegant"}
+],
+
+    
 "Chapter 15": [
     { "A": "庄家", "B": "Crops" },
     { "A": "牲畜", "B": "Domestic Animal" },

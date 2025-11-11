@@ -173,6 +173,38 @@
     { "A": "器官", "B": "organ, apparatus" },
     { "A": "器官分布图", "B": "organ distribution map" }
 ],
+    "Chapter 12": [
+  {"A": "白噪音", "B": "white noise"},
+  {"A": "波浪", "B": "wave"},
+  {"A": "岩石", "B": "rock"},
+  {"A": "后代", "B": "offspring"},
+  {"A": "神经", "B": "nerve"},
+  {"A": "世代", "B": "for generations"},
+  {"A": "功效", "B": "effect, efficiency"},
+  {"A": "患者", "B": "patient"},
+  {"A": "噪音", "B": "noise"},
+  {"A": "不妨", "B": "there is no harm in, might as well"},
+  {"A": "务必", "B": "must, to be sure to"},
+  {"A": "不得已", "B": "to act against one's will, to have no alternative"},
+  {"A": "鉴于", "B": "in view of, in light of"},
+  {"A": "嘈杂", "B": "noisy"},
+  {"A": "愈", "B": "cured, healed"},
+  {"A": "淘汰", "B": "to eliminate through selection or competition"},
+  {"A": "描绘", "B": "to describe, to depict"},
+  {"A": "抚摸", "B": "to stroke, to caress"},
+  {"A": "警惕", "B": "to be vigilant, to be on alert"},
+  {"A": "解除", "B": "to relieve, to remove, to dispel"},
+  {"A": "暴露", "B": "to expose, to reveal"},
+  {"A": "遗留", "B": "to leave behind, to hand down"},
+  {"A": "延续", "B": "to continue, to last"},
+  {"A": "呼唤", "B": "to shout, to call out"},
+  {"A": "竖", "B": "to set upright, to put up"},
+  {"A": "进化", "B": "to evolve"},
+  {"A": "靠拢", "B": "to come close, to approach"},
+  {"A": "暗示", "B": "to imply, to hint"},
+  {"A": "提示", "B": "to prompt, to point out"},
+  {"A": "给予", "B": "to give, to offer"}
+]，
 
 "Chapter 13": [
   {"A": "指南针", "B": "Compass"},

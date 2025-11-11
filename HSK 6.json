@@ -174,6 +174,46 @@
     { "A": "器官分布图", "B": "organ distribution map" }
 ],
 
+"Chapter 13": [
+  {"A": "指南针", "B": "Compass"},
+  {"A": "书籍", "B": "Books"},
+  {"A": "习俗", "B": "Custom"},
+  {"A": "趣味", "B": "Interest, Delight"},
+  {"A": "版本", "B": "Edition, Version"},
+  {"A": "人士", "B": "Public figure, person"},
+  {"A": "主流", "B": "Mainstream, essential aspect"},
+  {"A": "宗旨", "B": "Aim, purpose"},
+  {"A": "栏目", "B": "Column (in magazine)"},
+  {"A": "宗教", "B": "Religion"},
+  {"A": "经费", "B": "Fund, outlay"},
+  {"A": "预算", "B": "Budget"},
+  {"A": "参谋", "B": "Advisor, to advise"},
+  {"A": "向导", "B": "Guide"},
+  {"A": "一向", "B": "All along, always"},
+  {"A": "起初", "B": "At first, in the beginning"},
+  {"A": "一度", "B": "Once, for a time"},
+  {"A": "便于", "B": "To be easy to, to be convenient for"},
+  {"A": "犹如", "B": "To be like, to seem as if"},
+  {"A": "若干", "B": "Some, several"},
+  {"A": "变迁", "B": "To change, to go through vicissitudes"},
+  {"A": "迁徙", "B": "To migrate, to move"},
+  {"A": "侵犯", "B": "To invade, to encroach or infringe on"},
+  {"A": "居住", "B": "To live, to dwell"},
+  {"A": "问世", "B": "To be published, to come out"},
+  {"A": "携带", "B": "To carry, to bring along"},
+  {"A": "发行", "B": "To issue, to publish, to distribute"},
+  {"A": "延伸", "B": "To extend, to stretch"},
+  {"A": "振兴", "B": "To cause to prosper, to revitalize"},
+  {"A": "导航", "B": "To navigate, to pilot"},
+  {"A": "租赁", "B": "To rent, to hire, to lease"},
+  {"A": "纯粹", "B": "Solely, purely"},
+  {"A": "繁华", "B": "Busy, bustling, prosperous"},
+  {"A": "偏僻", "B": "Remote, far-off"},
+  {"A": "简要", "B": "Brief, concise"}
+],
+
+
+
 "Chapter 14": [
   {"A": "典型", "B": "typical, example, model"},
   {"A": "高峰", "B": "peak, summit, height"},

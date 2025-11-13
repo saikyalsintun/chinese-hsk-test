@@ -212,7 +212,7 @@
   {"A": "模范", "B": "model, example"},
   {"A": "尖端", "B": "most advanced"},
   {"A": "恭敬", "B": "respectful"}
-],
+    ],
     "Chapter 12": [
   {"A": "白噪音", "B": "white noise"},
   {"A": "波浪", "B": "wave"},

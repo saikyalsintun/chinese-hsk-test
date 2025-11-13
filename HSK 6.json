@@ -517,7 +517,7 @@
     { "A": "顿时", "B": "instantly, in a moment" },
     { "A": "颇", "B": "quite, rather" }
      ],
-    {
+    
 "Grammer HSK6_Extra": [
     { "A": "巴不得", "B": "eagerly wish, can't wait for" },
     { "A": "别提多。。。了", "B": "extremely, too (emphasizing degree)" },
@@ -593,6 +593,6 @@
     { "A": "将要", "B": "about to, going to" },
     { "A": "将就", "B": "to make do with, to put up with" }
   ]
-}
+
 
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LingoFlow Mobile</title>
+  <title>HSK 5 Practice</title>
   <style>
     :root {
       --primary: #58cc02;
@@ -29,12 +29,24 @@
       --bg: #131f24; --text: #eeeeee; --card-bg: #202f36; --border: #37464f;
     }
 
-    /* Top App Bar */
+    /* Brand Header */
+    .brand-header {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Top Controls */
     .app-bar {
       width: 100%;
       position: sticky; top: 0;
       background: var(--bg);
-      padding: 15px;
+      padding: 10px 15px;
       text-align: center;
       border-bottom: 2px solid var(--border);
       z-index: 100;
@@ -63,52 +75,58 @@
     .visible { display: block; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Matching Game Specific Styles */
-    .matching-columns {
-      display: flex; gap: 15px; width: 100%; margin-top: 10px;
-    }
-    .column { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-    .column-header { text-align: center; font-weight: bold; font-size: 12px; color: #afafaf; margin-bottom: 5px; }
+    /* Matching Game Layout */
+    .matching-columns { display: flex; gap: 12px; width: 100%; margin-top: 5px; }
+    .column { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .column-header { text-align: center; font-weight: bold; font-size: 11px; color: #afafaf; }
 
     .match-tile {
-      padding: 18px 10px;
+      padding: 15px 8px;
       background: var(--card-bg);
       border: 2px solid var(--border);
       border-radius: 12px;
       text-align: center;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       cursor: pointer;
-      min-height: 60px;
+      min-height: 55px;
       display: flex; align-items: center; justify-content: center;
     }
-    .match-tile.selected { border-color: #84d8ff; background: #ddf4ff; color: #1899d6; transform: scale(0.98); }
-    .match-tile.correct { border-color: #b8f28b; background: #d7ffb8; color: #58a700; opacity: 0.4; pointer-events: none; }
+    .match-tile.selected { border-color: #84d8ff; background: #ddf4ff; color: #1899d6; }
+    .match-tile.correct { border-color: #b8f28b; background: #d7ffb8; color: #58a700; opacity: 0.3; pointer-events: none; }
 
-    /* UI Components */
-    .card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 2px solid var(--border); margin-bottom: 15px; text-align: center; }
+    /* App UI Buttons */
+    .card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 2px solid var(--border); margin-bottom: 15px; position: relative; }
     .btn-main {
       width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 16px;
       font-size: 18px; font-weight: bold; box-shadow: 0 4px 0 var(--primary-dark); cursor: pointer;
     }
-    .btn-main:active { transform: translateY(4px); box-shadow: none; }
+    .btn-main:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--primary-dark); }
+    
+    .speaker-btn { background: #e5e5e5; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; margin-bottom: 10px; }
     
     input {
       width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 16px;
-      margin: 15px 0; background: var(--card-bg); color: var(--text); font-size: 18px;
+      margin: 15px 0; background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center;
     }
 
     select {
       width: 100%; padding: 12px; border-radius: 12px; border: 2px solid var(--border);
-      background: var(--card-bg); color: var(--text); margin-bottom: 15px;
+      background: var(--card-bg); color: var(--text); font-size: 16px;
+    }
+
+    .audio-control-bar {
+        display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
+  <div class="brand-header">HSK 5 Practice</div>
+
   <div class="app-bar">
     <select id="chapterSelect" onchange="changeChapter()">
-      <option value="">Select Chapter</option>
+      <option value="">-- Choose Chapter --</option>
     </select>
   </div>
 
@@ -116,10 +134,10 @@
     
     <div id="vocab" class="section visible">
       <div class="card">
-        <div style="font-size: 36px; font-weight: bold;" id="word">Hi!</div>
-        <button onclick="speakWord()" style="background:none; border:none; font-size:28px; margin-top:10px;">🔊</button>
+        <button class="speaker-btn" onclick="speakText(currentWordObj.A)">🔊</button>
+        <div style="font-size: 36px; font-weight: bold;" id="word">Select Chapter</div>
       </div>
-      <input type="text" id="answer" placeholder="Type Chinese...">
+      <input type="text" id="answer" placeholder="Type Chinese characters">
       <button class="btn-main" onclick="checkAnswer()">CHECK</button>
       <div id="status" style="margin-top:20px; text-align:center; font-weight:bold;"></div>
     </div>
@@ -135,25 +153,29 @@
           <div id="rightCol"></div>
         </div>
       </div>
-      <button class="btn-main" style="margin-top:25px; background:#1899d6; box-shadow:0 4px 0 #127ba9;" onclick="initMatchGame()">NEW SET</button>
+      <button class="btn-main" style="margin-top:25px; background:#1899d6; box-shadow:0 4px 0 #127ba9;" onclick="initMatchGame()">REFRESH SET</button>
     </div>
 
     <div id="paragraph" class="section">
+      <div class="audio-control-bar">
+        <span style="font-weight: bold;">Reading Passage</span>
+        <button class="btn-main" style="width: auto; padding: 8px 15px; font-size: 14px;" onclick="speakReading()">🔊 Read Aloud</button>
+      </div>
       <div class="card" id="paragraphText" style="text-align:left; line-height:1.8; font-size:18px;"></div>
     </div>
 
     <div id="retry" class="section">
       <div id="mistakeList"></div>
-      <button class="btn-main" style="background:var(--error); box-shadow:0 4px 0 #d33131;" onclick="clearMistakes()">CLEAR ALL</button>
+      <button class="btn-main" style="background:var(--error); box-shadow:0 4px 0 #d33131;" onclick="clearMistakes()">RESET MISTAKES</button>
     </div>
 
   </div>
 
   <nav class="bottom-nav">
-    <div class="nav-item active" onclick="nav('vocab')"><span class="nav-icon">⭐</span>Learn</div>
+    <div class="nav-item active" onclick="nav('vocab')"><span class="nav-icon">📖</span>Learn</div>
     <div class="nav-item" onclick="nav('match')"><span class="nav-icon">🧩</span>Match</div>
-    <div class="nav-item" onclick="nav('paragraph')"><span class="nav-icon">📚</span>Read</div>
-    <div class="nav-item" onclick="nav('retry')"><span class="nav-icon">🔄</span>Review</div>
+    <div class="nav-item" onclick="nav('paragraph')"><span class="nav-icon">📝</span>Read</div>
+    <div class="nav-item" onclick="nav('retry')"><span class="nav-icon">🔄</span>Mistakes</div>
     <div class="nav-item" onclick="toggleDark()"><span class="nav-icon">🌗</span>Dark</div>
   </nav>
 
@@ -163,10 +185,10 @@
     let selLeft = null, selRight = null;
     let mistakes = JSON.parse(localStorage.getItem('mistakes') || '[]');
 
-    // Load Files
+    // Load Data
     Promise.all([
-      fetch('HSK 6.json').then(r=>r.json()).catch(()=>({"Demo":[{"A":"苹果","B":"Apple"},{"A":"香蕉","B":"Banana"},{"A":"猫","B":"Cat"},{"A":"狗","B":"Dog"}]})),
-      fetch('Paragraph.json').then(r=>r.json()).catch(()=>({"Demo":"Welcome to your learning app!"}))
+      fetch('HSK 6.json').then(r=>r.json()).catch(()=>({"Unit 1":[{"A":"北京","B":"Beijing"},{"A":"老师","B":"Teacher"},{"A":"学生","B":"Student"},{"A":"苹果","B":"Apple"},{"A":"快乐","B":"Happy"}]})),
+      fetch('Paragraph.json').then(r=>r.json()).catch(()=>({"Unit 1":"我在北京学习汉语。汉语很有趣！"}))
     ]).then(([v, p]) => {
       vocabData = v; paragraphData = p;
       const sel = document.getElementById('chapterSelect');
@@ -174,6 +196,7 @@
     });
 
     function nav(id) {
+      window.speechSynthesis.cancel(); // Stop talking when switching screens
       document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.getElementById(id).classList.add('visible');
@@ -188,9 +211,10 @@
       if(!currentCh) return;
       newWord();
       if(document.getElementById('match').classList.contains('visible')) initMatchGame();
+      if(document.getElementById('paragraph').classList.contains('visible')) loadPara();
     }
 
-    // --- Learn Logic ---
+    // LEARN ENGINE
     function newWord() {
       const list = vocabData[currentCh];
       currentWordObj = list[Math.floor(Math.random() * list.length)];
@@ -202,10 +226,10 @@
     function checkAnswer() {
       const user = document.getElementById('answer').value.trim();
       if(user === currentWordObj.A) {
-        document.getElementById('status').innerHTML = "✅ Great!";
+        document.getElementById('status').innerHTML = "<span style='color:var(--primary)'>✅ Correct!</span>";
         setTimeout(newWord, 1000);
       } else {
-        document.getElementById('status').innerHTML = "❌ Correct: " + currentWordObj.A;
+        document.getElementById('status').innerHTML = "<span style='color:var(--error)'>❌ " + currentWordObj.A + "</span>";
         if(!mistakes.some(m => m.B === currentWordObj.B)) {
           mistakes.push(currentWordObj);
           localStorage.setItem('mistakes', JSON.stringify(mistakes));
@@ -213,21 +237,31 @@
       }
     }
 
-    function speakWord() {
-      let m = new SpeechSynthesisUtterance(currentWordObj.A);
-      m.lang = 'zh-CN';
-      window.speechSynthesis.speak(m);
+    // AUDIO ENGINE (Supports Chinese)
+    function speakText(text) {
+      if(!text) return;
+      window.speechSynthesis.cancel(); 
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.lang = 'zh-CN';
+      msg.rate = 0.9; // Slightly slower for learners
+      window.speechSynthesis.speak(msg);
     }
 
-    // --- Matching Logic (Separated Columns) ---
+    function speakReading() {
+      const text = document.getElementById('paragraphText').textContent;
+      // Regex to filter only Chinese characters if needed, 
+      // but usually zh-CN lang setting handles mixed text well.
+      speakText(text);
+    }
+
+    // MATCHING LOGIC
     function initMatchGame() {
       const leftBox = document.getElementById('leftCol');
       const rightBox = document.getElementById('rightCol');
       leftBox.innerHTML = ''; rightBox.innerHTML = '';
-      
       if(!currentCh) return;
+
       let pool = [...vocabData[currentCh]].sort(() => 0.5 - Math.random()).slice(0, 5);
-      
       let leftItems = pool.map(i => ({txt: i.B, pair: i.A})).sort(() => 0.5 - Math.random());
       let rightItems = pool.map(i => ({txt: i.A, pair: i.B})).sort(() => 0.5 - Math.random());
 
@@ -236,8 +270,7 @@
         d.textContent = item.txt;
         d.onclick = () => {
           if(selLeft) selLeft.el.classList.remove('selected');
-          selLeft = {el: d, data: item};
-          d.classList.add('selected');
+          selLeft = {el: d, data: item}; d.classList.add('selected');
           checkMatch();
         };
         leftBox.appendChild(d);
@@ -248,8 +281,7 @@
         d.textContent = item.txt;
         d.onclick = () => {
           if(selRight) selRight.el.classList.remove('selected');
-          selRight = {el: d, data: item};
-          d.classList.add('selected');
+          selRight = {el: d, data: item}; d.classList.add('selected');
           checkMatch();
         };
         rightBox.appendChild(d);
@@ -259,6 +291,7 @@
     function checkMatch() {
       if(selLeft && selRight) {
         if(selLeft.data.pair === selRight.data.txt) {
+          speakText(selRight.data.txt); // Audio feedback on correct match
           selLeft.el.classList.add('correct');
           selRight.el.classList.add('correct');
           selLeft = null; selRight = null;
@@ -270,14 +303,21 @@
       }
     }
 
-    function loadPara() { document.getElementById('paragraphText').textContent = paragraphData[currentCh] || "No content."; }
+    function loadPara() { 
+        document.getElementById('paragraphText').textContent = paragraphData[currentCh] || "No text for this chapter."; 
+    }
+
     function renderMistakes() {
       const list = document.getElementById('mistakeList');
-      list.innerHTML = mistakes.length ? '' : '<p style="text-align:center">All clear!</p>';
+      list.innerHTML = mistakes.length ? '' : '<p style="text-align:center">Mistake list is empty!</p>';
       mistakes.forEach(m => {
-        list.innerHTML += `<div class="card" style="padding:15px; margin-bottom:10px;">${m.B} = ${m.A}</div>`;
+        list.innerHTML += `<div class="card" style="padding:15px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <span><b>${m.B}</b>: ${m.A}</span>
+          <button onclick="speakText('${m.A}')" style="background:none; border:none; font-size:18px;">🔊</button>
+        </div>`;
       });
     }
+
     function clearMistakes() { mistakes = []; localStorage.removeItem('mistakes'); renderMistakes(); }
     function toggleDark() { document.body.classList.toggle('dark-mode'); }
   </script>

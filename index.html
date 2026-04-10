@@ -1,285 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Language Practice Hub</title>
-  <style>
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f7f9fc; color:#333;
-      text-align:center;
-      transition:0.4s;
-      min-height:100vh;
-      display:flex; flex-direction:column; align-items:center; padding:20px;
-    }
-    body.dark-mode { background:#121212; color:#f1f1f1; }
-    h1 { font-weight:700; margin:15px 0 25px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#6C5CE7">
+    <title>PolyglotFlow | Pro Hub</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Thai:wght@500;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .menu { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:25px; }
-    .menu button {
-      background:#1a73e8; color:white; border:none; border-radius:10px;
-      padding:10px 18px; cursor:pointer; font-size:1em; transition:0.25s;
-    }
-    .menu button.active { background:#0b5ed7; box-shadow:0 4px 8px rgba(0,0,0,0.2); }
-    .menu button:hover { transform:translateY(-2px); }
-    .dark-mode-icon { font-size:1.6em; cursor:pointer; margin-left:5px; }
-
-    .section { display:none; width:100%; max-width:700px; margin-top:10px; }
-    .visible { display:block; }
-
-    .word { font-size:2em; margin:15px 0; color:#1a73e8; }
-    input { padding:8px; font-size:1.2em; width:70%; border-radius:6px; border:1px solid #ccc; margin-bottom:10px; }
-    button.action { background:#1a73e8; color:white; border:none; border-radius:6px; padding:10px 18px; font-size:1.1em; cursor:pointer; transition:0.25s; }
-    button.action:hover { background:#155ab6; }
-    .status { margin-top:10px; font-weight:bold; }
-    .counter { margin-top:8px; font-weight:bold; }
-
-    table { margin:20px auto; border-collapse:collapse; width:90%; max-width:500px; background:white; border-radius:8px; overflow:hidden; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-    th, td { border:1px solid #ddd; padding:8px; font-size:0.95em; }
-    th { background:#1a73e8; color:white; }
-    body.dark-mode table { background:#1e1e1e; color:#f1f1f1; }
-    body.dark-mode th { background:#0b5ed7; }
-
-    .paragraph-card { background:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); border-radius:10px; padding:20px; text-align:left; font-size:1.1em; line-height:1.8; color:#333; white-space:pre-wrap; margin-top:20px; }
-    body.dark-mode .paragraph-card { background:#1e1e1e; color:#f1f1f1; }
-
-    .chat-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; text-align:left; }
-    .bubble { padding:12px 16px; border-radius:14px; max-width:80%; line-height:1.6; word-wrap:break-word; }
-    .xiaoli { background:#e8f0fe; align-self:flex-start; }
-    .xiaowang { background:#d1ecf1; align-self:flex-end; }
-    body.dark-mode .xiaoli { background:#2a2a72; color:white; }
-    body.dark-mode .xiaowang { background:#2a7272; color:white; }
-
-    @media (max-width:600px){ input{width:85%; font-size:1em;} .word{font-size:1.5em;} table{font-size:0.9em;} }
-  </style>
-</head>
-<body>
-  <h1>Language Practice Hub</h1>
-
-  <div class="menu">
-    <button id="menu-vocab" class="active" onclick="showSection('vocab')">Vocabulary Test</button>
-    <button id="menu-paragraph" onclick="showSection('paragraph')">Paragraph</button>
-    <button id="menu-conversation" onclick="showSection('conversation')">Conversation</button>
-    <button id="menu-list" onclick="showSection('vocabList')">Vocabulary List</button>
-    <button id="menu-retry" onclick="showSection('retry')">Retry</button>
-    <span class="dark-mode-icon" onclick="toggleDarkMode()">🌙</span>
-  </div>
-  
-
-  <!-- VOCAB TEST -->
-  <div id="vocab" class="section visible">
-    <label>Choose a Chapter:</label>
-    <select id="chapterSelect" onchange="loadChapter()">
-      <option value="">-- Select Chapter --</option>
-    </select>
-
-    <div class="word" id="word"></div>
-    <input type="text" id="answer" placeholder="Type Chinese here">
-    <button class="action" onclick="checkAnswer()">Check</button>
-
-    <div class="status" id="status"></div>
-    <div class="counter" id="counter"></div>
-
-    <table id="wrongTable">
-      <thead>
-        <tr><th>English</th><th>Your Answer</th><th>Correct</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <!-- PARAGRAPH -->
-  <div id="paragraph" class="section">
-    <h2>Paragraph Practice</h2>
-    <select id="paragraphSelect" onchange="loadParagraph()">
-      <option value="">-- Select Chapter --</option>
-    </select>
-    <div id="paragraphText" class="paragraph-card"></div>
-  </div>
-
-  <!-- CONVERSATION -->
-  <div id="conversation" class="section">
-    <h2>Conversation Practice</h2>
-    <select id="conversationSelect" onchange="loadConversation()">
-      <option value="">-- Select Chapter --</option>
-    </select>
-    <div id="conversationText" class="chat-container"></div>
-  </div>
-
-  <!-- VOCAB LIST -->
-  <div id="vocabList" class="section"></div>
-
-  <!-- RETRY SECTION -->
-  <div id="retry" class="section">
-    <h2>Retry Incorrect Words</h2>
-    <br/>
-    <button class="action" onclick="clearRetryHistory()">🗑️ Remove History</button>
-    <table id="retryTable">
-      <thead><tr><th>English</th><th>Correct Chinese</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <script>
-    let vocabData = {}, paragraphData = {}, conversationData = {};
-    let vocab = [], usedIndices = new Set(), current = {}, totalWords = 0;
-    let wrongWords = JSON.parse(localStorage.getItem('wrongWords') || '[]');
-
-    function toggleDarkMode(){ document.body.classList.toggle('dark-mode'); }
-
-    // LOAD JSON FILES
-    Promise.all([
-      fetch('HSK 6.json').then(r=>r.json()),
-      fetch('Paragraph.json').then(r=>r.json()),
-      fetch('Conversation.json').then(r=>r.json())
-    ])
-    .then(([v,p,c])=>{
-      vocabData=v; paragraphData=p; conversationData=c;
-      populateDropdowns();
-      updateRetryTable();
-    });
-
-    function populateDropdowns(){
-      populateDropdown('chapterSelect',vocabData);
-      populateDropdown('paragraphSelect',paragraphData);
-      populateDropdown('conversationSelect',conversationData);
-    }
-    function populateDropdown(id,data){
-      const select=document.getElementById(id);
-      Object.keys(data).forEach(ch=>{
-        const o=document.createElement('option');
-        o.value=ch; o.textContent=ch;
-        select.appendChild(o);
-      });
-    }
-
-    function showSection(id){
-      document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-      document.getElementById(id).style.display='block';
-      document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
-      if(document.getElementById('menu-'+id)) document.getElementById('menu-'+id).classList.add('active');
-      if(id==='vocabList') loadVocabList();
-      if(id==='retry') updateRetryTable();
-    }
-
-    // VOCAB TEST
-    function loadChapter(){
-      const ch=document.getElementById('chapterSelect').value;
-      if(!ch) return;
-      vocab=vocabData[ch];
-      usedIndices.clear();
-      totalWords=vocab.length;
-      document.querySelector('#wrongTable tbody').innerHTML='';
-      showRandomWord();
-    }
-    function showRandomWord(){
-      if(usedIndices.size===vocab.length){
-        document.getElementById('word').textContent="🎉 All words done!";
-        document.getElementById('answer').disabled=true;
-        return;
-      }
-      let i;
-      do{i=Math.floor(Math.random()*vocab.length);}while(usedIndices.has(i));
-      usedIndices.add(i);
-      current=vocab[i];
-      document.getElementById('word').textContent=current.B;
-      document.getElementById('answer').value='';
-      document.getElementById('answer').disabled=false;
-      document.getElementById('status').textContent='';
-      updateCounter();
-    }
-    function checkAnswer(){
-      const input=document.getElementById('answer').value.trim();
-      if(!input){document.getElementById('status').textContent="⚠️ Please type!";return;}
-      const correct=current.A.trim();
-      if(input===correct){ document.getElementById('status').textContent="✅ Correct!"; }
-      else{
-        document.getElementById('status').textContent=`❌ Wrong. Correct: ${correct}`;
-        addWrongWord(current.B,input,correct);
-      }
-      setTimeout(showRandomWord,1500);
-    }
-    function addWrongWord(eng,user,correct){
-      const tbody=document.querySelector('#wrongTable tbody');
-      const row=document.createElement('tr');
-      row.innerHTML=`<td>${eng}</td><td>${user}</td><td>${correct}</td>`;
-      row.style.backgroundColor="#ffe6e6";
-      tbody.appendChild(row);
-
-      // Add to wrongWords only if not already present
-      if(!wrongWords.some(w=>w.English===eng)){
-        wrongWords.push({English:eng, Chinese:correct});
-        localStorage.setItem('wrongWords',JSON.stringify(wrongWords));
-      }
-    }
-    function updateCounter(){
-      document.getElementById('counter').textContent=`Words Completed: ${usedIndices.size}/${totalWords}`;
-    }
-
-    // PARAGRAPH
-    function loadParagraph(){
-      const ch=document.getElementById('paragraphSelect').value;
-      document.getElementById('paragraphText').textContent = ch ? paragraphData[ch] : '';
-    }
-
-    // CONVERSATION
-    function loadConversation(){
-      const ch=document.getElementById('conversationSelect').value;
-      const container=document.getElementById('conversationText');
-      container.innerHTML='';
-      if(!ch)return;
-      conversationData[ch].split('\n').forEach(line=>{
-        const div=document.createElement('div');
-        div.classList.add('bubble');
-        if(line.startsWith('小李')) div.classList.add('xiaoli');
-        else if(line.startsWith('小王')) div.classList.add('xiaowang');
-        div.textContent=line.trim();
-        container.appendChild(div);
-      });
-    }
-
-    // VOCAB LIST
-    function loadVocabList(){
-      const c=document.getElementById('vocabList');
-      c.innerHTML='<h2>Vocabulary List</h2>';
-      for(const ch in vocabData){
-        const h=document.createElement('h3');
-        h.textContent=ch; c.appendChild(h);
-        const t=document.createElement('table');
-        t.innerHTML='<thead><tr><th>English</th><th>Chinese</th></tr></thead><tbody></tbody>';
-        const tb=t.querySelector('tbody');
-        vocabData[ch].forEach(w=>{
-          const r=document.createElement('tr');
-          r.innerHTML=`<td>${w.B}</td><td>${w.A}</td>`;
-          tb.appendChild(r);
-        });
-        c.appendChild(t);
-      }
-    }
-
-    // RETRY SECTION
-    function updateRetryTable(){
-      const tbody=document.querySelector('#retryTable tbody');
-      tbody.innerHTML='';
-      const seen = new Set();
-      wrongWords.forEach(w=>{
-        if(!seen.has(w.English)){
-          seen.add(w.English);
-          const r=document.createElement('tr');
-          r.innerHTML=`<td>${w.English}</td><td>${w.Chinese}</td>`;
-          tbody.appendChild(r);
+    <style>
+        :root {
+            --primary: #6C5CE7; --secondary: #A29BFE; --accent: #00CEC9; --bg: #F8F9FE;
+            --card-bg: rgba(255, 255, 255, 0.9); --text: #2D3436; --text-light: #636E72;
+            --glass: rgba(255, 255, 255, 0.8); --shadow: 0 20px 40px rgba(108, 92, 231, 0.08);
+            --wrong: #ff7675; --correct: #55efc4;
         }
-      });
+        [data-theme="dark"] {
+            --bg: #0C0C1E; --card-bg: rgba(30, 30, 50, 0.95); --text: #F1F2F6;
+            --text-light: #A4A4B5; --glass: rgba(20, 20, 40, 0.8); --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg); color: var(--text); padding-bottom: 100px; }
+
+        /* --- Global UI Elements --- */
+        .header { padding: 20px; background: var(--glass); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .top-stats { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .xp-bar { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        .xp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+
+        .lang-tabs { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
+        .tab { padding: 10px 20px; border-radius: 14px; background: var(--card-bg); font-weight: 700; cursor: pointer; white-space: nowrap; border: 2px solid transparent; color: var(--text-light); box-shadow: var(--shadow); }
+        .tab.active { background: var(--primary); color: white; border-color: var(--secondary); transform: translateY(-2px); }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
+        .card { background: var(--card-bg); border-radius: 24px; padding: 25px; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
+
+        /* --- Special Chinese Modes Navigation --- */
+        .mode-switcher { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
+        .mode-btn { flex: 1; padding: 12px; border-radius: 12px; border: none; background: var(--card-bg); color: var(--text-light); font-weight: 800; font-size: 11px; cursor: pointer; text-transform: uppercase; white-space: nowrap; }
+        .mode-btn.active { background: var(--secondary); color: white; }
+
+        /* --- Content Areas --- */
+        .field { margin-bottom: 18px; text-align: left; }
+        .field label { font-size: 10px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        input, select, textarea { width: 100%; padding: 16px; border-radius: 16px; border: none; background: rgba(0,0,0,0.04); color: var(--text); font-family: inherit; margin-top: 6px; font-size: 16px; }
+        [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea { background: rgba(255,255,255,0.05); }
+
+        .btn-action { width: 100%; padding: 18px; border-radius: 18px; border: none; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 800; cursor: pointer; box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2); }
+        
+        /* --- Conversation Bubbles --- */
+        .chat-area { display: flex; flex-direction: column; gap: 10px; }
+        .bubble { padding: 12px 18px; border-radius: 18px; max-width: 85%; font-size: 15px; line-height: 1.5; }
+        .xiaoli { align-self: flex-start; background: #e8f0fe; color: #1a73e8; border-bottom-left-radius: 4px; }
+        .xiaowang { align-self: flex-end; background: #d1ecf1; color: #0c5460; border-bottom-right-radius: 4px; }
+        [data-theme="dark"] .xiaoli { background: #2a2a72; color: #fff; }
+        [data-theme="dark"] .xiaowang { background: #2a7272; color: #fff; }
+
+        /* --- Data Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        th { font-weight: 800; color: var(--primary); text-transform: uppercase; font-size: 10px; }
+
+        /* --- Matching Game --- */
+        .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .match-box { padding: 15px; background: var(--bg); border-radius: 12px; cursor: pointer; font-size: 14px; text-align: center; border: 2px solid transparent; font-weight: 600; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .match-box.selected { border-color: var(--primary); background: var(--secondary); color: white; }
+        .match-box.hidden { visibility: hidden; }
+
+        /* --- Bottom Nav --- */
+        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; height: 70px; background: var(--card-bg); border-radius: 20px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .nav-link { color: var(--text-light); font-size: 20px; cursor: pointer; transition: 0.2s; }
+        .nav-link.active { color: var(--primary); transform: translateY(-5px); }
+
+        .hidden { display: none; }
+        .paragraph-text { white-space: pre-wrap; line-height: 2; font-size: 18px; text-align: left; font-family: 'Noto Sans SC', sans-serif; }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="header">
+        <div class="top-stats">
+            <span style="font-weight: 800; font-size: 14px;"><i class="fas fa-bolt" style="color: #f1c40f;"></i> <span id="xp-val">0</span> XP</span>
+            <span id="sync-icon"><i class="fas fa-circle-check" style="color: var(--accent);"></i></span>
+            <span onclick="toggleTheme()" style="cursor: pointer;"><i class="fas fa-adjust"></i></span>
+        </div>
+        <div class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+    </div>
+
+    <div class="lang-tabs" id="lang-selector">
+        <div class="tab active" onclick="setLang('Thai')">🇹🇭 Thai</div>
+        <div class="tab" onclick="setLang('Chinese')">🇨🇳 Chinese</div>
+        <div class="tab" onclick="setLang('Korean')">🇰🇷 Korean</div>
+    </div>
+
+    <div class="container">
+        
+        <div id="screen-add" class="screen">
+            <div class="card">
+                <div class="field"><label>Topic / Chapter</label>
+                    <select id="topic-select" onchange="toggleNewTopicInput()"></select>
+                    <input type="text" id="topic-new" placeholder="Create new chapter..." style="display:none">
+                </div>
+                <div class="field"><label id="label-target">Target Sentence</label><textarea id="input-target"></textarea></div>
+                <div class="field"><label>Translation</label><textarea id="input-trans"></textarea></div>
+                <button class="btn-action" onclick="saveData()">Add to Library</button>
+            </div>
+        </div>
+
+        <div id="screen-lib" class="screen hidden">
+            <div id="lib-content"></div>
+        </div>
+
+        <div id="screen-practice" class="screen hidden">
+            <div id="chinese-modes" class="mode-switcher hidden">
+                <button class="mode-btn active" onclick="setMode('vocab')">Vocab</button>
+                <button class="mode-btn" onclick="setMode('match')">Match</button>
+                <button class="mode-btn" onclick="setMode('para')">Paragraph</button>
+                <button class="mode-btn" onclick="setMode('conv')">Conv</button>
+                <button class="mode-btn" onclick="setMode('retry')">Retry</button>
+            </div>
+
+            <div class="card" id="practice-card">
+                </div>
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-link active" onclick="navTo('screen-add')"><i class="fas fa-plus-circle"></i></div>
+        <div class="nav-link" onclick="navTo('screen-lib')"><i class="fas fa-book-open"></i></div>
+        <div class="nav-link" onclick="navTo('screen-practice')"><i class="fas fa-brain"></i></div>
+    </nav>
+
+<script>
+    // System State
+    let state = {
+        lang: 'Thai',
+        screen: 'screen-add',
+        mode: 'vocab',
+        xp: parseInt(localStorage.getItem('xp') || '0'),
+        wrongWords: JSON.parse(localStorage.getItem('wrongWords') || '[]'),
+        chineseData: { vocab: {}, para: {}, conv: {} }
+    };
+
+    const SCRIPT_URL = "YOUR_APPS_SCRIPT_URL";
+
+    window.onload = () => {
+        updateXP(0);
+        setLang('Thai');
+        loadChineseExtras();
+    };
+
+    function toggleTheme() {
+        const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', theme);
     }
 
-    function clearRetryHistory(){
-      wrongWords=[];
-      localStorage.removeItem('wrongWords');
-      document.querySelector('#retryTable tbody').innerHTML='';
-      alert("✅ Retry history removed!");
+    // --- Core Logic ---
+    function setLang(l) {
+        state.lang = l;
+        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.innerText.includes(l)));
+        document.getElementById('label-target').innerText = `${l} Sentence`;
+        
+        // Show/Hide Chinese features
+        document.getElementById('chinese-modes').classList.toggle('hidden', l !== 'Chinese');
+        
+        updateTopicDropdown();
+        if(state.screen === 'screen-lib') renderLib();
+        if(state.screen === 'screen-practice') setMode(state.mode);
     }
-  </script>
+
+    function navTo(s) {
+        state.screen = s;
+        document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
+        document.getElementById(s).classList.remove('hidden');
+        document.querySelectorAll('.nav-link').forEach((n, i) => n.classList.toggle('active', ['screen-add','screen-lib','screen-practice'][i] === s));
+        
+        if(s === 'screen-lib') renderLib();
+        if(s === 'screen-practice') setMode(state.mode);
+    }
+
+    function getLocal() { return JSON.parse(localStorage.getItem('data_' + state.lang)) || {}; }
+
+    function updateTopicDropdown() {
+        const data = getLocal();
+        const sel = document.getElementById('topic-select');
+        sel.innerHTML = '<option value="NEW">+ New Chapter</option>';
+        Object.keys(data).forEach(k => sel.innerHTML += `<option value="${k}">${k}</option>`);
+        toggleNewTopicInput();
+    }
+
+    function toggleNewTopicInput() {
+        document.getElementById('topic-new').style.display = document.getElementById('topic-select').value === 'NEW' ? 'block' : 'none';
+    }
+
+    // --- Content Loading ---
+    async function loadChineseExtras() {
+        // Here you would fetch Paragraph.json and Conversation.json
+        // Mock data for demonstration:
+        state.chineseData.para = { "Chapter 1": "你好！欢迎来到中国。这是一段练习文字。", "Chapter 2": "今天天气很好，我们去公园吧。" };
+        state.chineseData.conv = { "Meeting": "小李: 你好！\n小王: 你好，好久不见。\n小李: 最近怎么样？" };
+    }
+
+    // --- Features ---
+    function renderLib() {
+        const data = getLocal();
+        const container = document.getElementById('lib-content');
+        container.innerHTML = '';
+        for(let ch in data) {
+            let html = `<div class="card"><h3 style="margin-top:0; color:var(--primary)">${ch}</h3><table>`;
+            data[ch].forEach(item => {
+                html += `<tr><td>${item.target}</td><td style="color:var(--text-light)">${item.trans}</td></tr>`;
+            });
+            container.innerHTML += html + '</table></div>';
+        }
+    }
+
+    function setMode(m) {
+        state.mode = m;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.innerText.toLowerCase().includes(m)));
+        const area = document.getElementById('practice-card');
+        area.innerHTML = '';
+
+        if(m === 'vocab') setupVocabTest();
+        if(m === 'para') setupPara();
+        if(m === 'conv') setupConv();
+        if(m === 'match') setupMatch();
+        if(m === 'retry') setupRetry();
+    }
+
+    // 1. Vocab Test (With HSK Chapter Select)
+    function setupVocabTest() {
+        const data = getLocal();
+        const area = document.getElementById('practice-card');
+        area.innerHTML = `
+            <div class="field"><label>Choose Chapter</label><select id="test-ch" onchange="startVocabTest()"></select></div>
+            <div id="test-zone"></div>
+        `;
+        const sel = document.getElementById('test-ch');
+        sel.innerHTML = '<option value="">-- Select --</option>';
+        Object.keys(data).forEach(k => sel.innerHTML += `<option value="${k}">${k}</option>`);
+    }
+
+    function startVocabTest() {
+        const ch = document.getElementById('test-ch').value;
+        const words = getLocal()[ch];
+        const q = words[Math.floor(Math.random() * words.length)];
+        const zone = document.getElementById('test-zone');
+        zone.innerHTML = `
+            <div style="font-size:12px; font-weight:800; color:var(--text-light); margin-bottom:10px">TRANSLATE TO ${state.lang.toUpperCase()}</div>
+            <h1 style="margin:10px 0 25px 0">${q.trans}</h1>
+            <textarea id="ans-input" placeholder="Type here..."></textarea>
+            <button class="btn-action" style="margin-top:15px" onclick="checkVocab('${q.target}', '${q.trans}')">Verify</button>
+        `;
+    }
+
+    function checkVocab(correct, qText) {
+        const user = document.getElementById('ans-input').value.trim();
+        if(user === correct) {
+            alert("✅ Correct!");
+            updateXP(10);
+            startVocabTest();
+        } else {
+            alert("❌ Correct answer: " + correct);
+            addWrong(qText, correct);
+            startVocabTest();
+        }
+    }
+
+    // 2. Paragraph Mode
+    function setupPara() {
+        const area = document.getElementById('practice-card');
+        area.innerHTML = `
+            <select id="p-sel" onchange="document.getElementById('p-text').innerText = state.chineseData.para[this.value]">
+                <option value="">-- Select Paragraph --</option>
+            </select>
+            <div id="p-text" class="paragraph-text" style="margin-top:20px"></div>
+        `;
+        Object.keys(state.chineseData.para).forEach(k => document.getElementById('p-sel').innerHTML += `<option value="${k}">${k}</option>`);
+    }
+
+    // 3. Conversation Mode
+    function setupConv() {
+        const area = document.getElementById('practice-card');
+        area.innerHTML = `
+            <select id="c-sel" onchange="renderConv(this.value)"><option value="">-- Select Conversation --</option></select>
+            <div id="c-chat" class="chat-area" style="margin-top:20px"></div>
+        `;
+        Object.keys(state.chineseData.conv).forEach(k => document.getElementById('c-sel').innerHTML += `<option value="${k}">${k}</option>`);
+    }
+
+    function renderConv(val) {
+        const chat = document.getElementById('c-chat');
+        chat.innerHTML = '';
+        state.chineseData.conv[val].split('\n').forEach(line => {
+            const div = document.createElement('div');
+            div.className = 'bubble ' + (line.startsWith('小李') ? 'xiaoli' : 'xiaowang');
+            div.innerText = line;
+            chat.appendChild(div);
+        });
+    }
+
+    // 4. Retry Mode
+    function setupRetry() {
+        const area = document.getElementById('practice-card');
+        area.innerHTML = `<h3>Retry List</h3><table><thead><tr><th>Meaning</th><th>Correct Script</th></tr></thead><tbody id="retry-body"></tbody></table>
+        <button class="btn-action" style="margin-top:20px; background: #bbb" onclick="state.wrongWords=[]; localStorage.removeItem('wrongWords'); setupRetry();">Clear History</button>`;
+        const body = document.getElementById('retry-body');
+        state.wrongWords.forEach(w => {
+            body.innerHTML += `<tr><td>${w.q}</td><td style="font-weight:700; color:var(--primary)">${w.a}</td></tr>`;
+        });
+    }
+
+    // --- Helpers ---
+    function updateXP(val) {
+        state.xp += val;
+        localStorage.setItem('xp', state.xp);
+        document.getElementById('xp-val').innerText = state.xp;
+        document.getElementById('xp-fill').style.width = (state.xp % 100) + '%';
+    }
+
+    function addWrong(q, a) {
+        if(!state.wrongWords.some(w => w.q === q)) {
+            state.wrongWords.push({q, a});
+            localStorage.setItem('wrongWords', JSON.stringify(state.wrongWords));
+        }
+    }
+
+    function saveData() {
+        const topic = document.getElementById('topic-select').value === 'NEW' ? document.getElementById('topic-new').value : document.getElementById('topic-select').value;
+        const target = document.getElementById('input-target').value.trim();
+        const trans = document.getElementById('input-trans').value.trim();
+        if(!topic || !target || !trans) return;
+
+        let data = getLocal();
+        if(!data[topic]) data[topic] = [];
+        data[topic].push({target, trans});
+        localStorage.setItem('data_' + state.lang, JSON.stringify(data));
+        
+        document.getElementById('input-target').value = '';
+        document.getElementById('input-trans').value = '';
+        updateXP(5);
+        navTo('screen-lib');
+    }
+</script>
 </body>
 </html>
